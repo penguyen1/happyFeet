@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ../boot_partials/head %>
+  <title>New User</title>
+</head>
+<body>
+
+  <div class="ui middle aligned center aligned grid">
+    <h1> <%= data %> </h1>
+    <div class="column">
+
+      <form class="ui large form" action="/test" method="post">
+        <div class="ui stacked segment">
+          <div class="field">
+            <input type="text" name="name" placeholder="Name">
+          </div>
+          <div class="field">
+            <input type="text" name="email" placeholder="E-mail Address">
+          </div>
+          <div class="field">
+            <input type="password" name="password" placeholder="Create a new password">
+          </div>
+          <!-- budget input -->
+          <!-- shoe size drop down  -->
+          <!-- <div class="ui fluid large teal submit button">Login</div> -->
+          <input type="submit" value="Submit" class="ui fluid large teal submit button">
+        </div>
+        <div class="ui error message"></div>
+      </form>
+
+    </div>
+  </div>
+  <%- include ../boot_partials/footer %>
+</body>
+</html>

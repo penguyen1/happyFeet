@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Welcome Back!</title>
+    <%- include ../boot_partials/head %>
+  </head>
+
+  <body>
+    <header>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <%- include ../boot_partials/nav %>
+    </nav>
+    </header>
+    
+    <div class="container">
+      <div class="starter-template">
+
+      <% for(var i in data){ %>           <!-- use semantic card template? -->
+        <div>
+          <div><b>
+            Order ID: <%= data[i].order_id %><br>
+            Name: <%= data[i].name %><br>
+            Meat: <%= data[i].meat_id %><br>
+            Bun: <%= data[i].bun_id %><br>
+            Doneness: <%= data[i].doneness %><br>
+          </div>
+          <!-- cheeses -->
+          <!-- toppings -->
+
+          <% var edit = data[i].order_id + "/edit" %>  
+          <% var remove = data[i].order_id + "?_method=delete" %>  
+
+          <form action=<%= edit %> method="get">
+            <button> Edit </button>
+          </form>
+          <form action=<%= remove %> method="post">
+            <button> Delete </button>
+          </form>
+        </b></div><br>
+
+      <% } %> 
+
+      </div>
+    </div><!-- /.container -->
+    <%- include ../boot_partials/footer %>
+  </body>
+</html>
