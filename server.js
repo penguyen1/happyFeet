@@ -36,9 +36,8 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-app.get('/', (req,res)=>res.render('pages/login', {data: 'Welcome to Happy Feet!'}));
+app.get('/', (req,res)=>res.render('pages/login'));
 
-app.post('/test', (req,res)=>res.send(req.body));    // test
 
 // Redirect to sneakers route
 // app.use('/sneakers', sneakerRoutes);
