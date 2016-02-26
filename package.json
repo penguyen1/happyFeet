@@ -1,0 +1,23 @@
+{
+  "name": "happy_feet",
+  "version": "1.0.0",
+  "description": "Project 2 using CRUD and RESTful routes",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/penguyen1/happyFeet.git"
+  },
+  "author": "Peter Nguyen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/penguyen1/happyFeet/issues"
+  },
+  "homepage": "https://github.com/penguyen1/happyFeet#readme",
+  "dependencies": {
+    "semantic-ui": "^2.1.8"
+  }
+}
