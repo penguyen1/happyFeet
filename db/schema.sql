@@ -19,10 +19,10 @@ CREATE TABLE users (
 CREATE TABLE sneakers (
   sneaker_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
-  brand_id integer REFERENCES brand ON DELETE CASCADE,
-  retail_price numeric,
+  -- brand_id integer REFERENCES brand ON DELETE CASCADE,
+  retail_price numeric,     -- how to add monetary input
   resale_price numeric,
-  description text
+  description text          -- how to add description text box?
 );
 
 CREATE TABLE inventory (

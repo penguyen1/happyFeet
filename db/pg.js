@@ -5,8 +5,6 @@ var bcrypt            = require('bcrypt');
 var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep
 
 function loginUser(req,res,next) {
-  // var email     = req.body.email;
-  // var password  = req.body.password;
   pg.connect(connectionString, function(err,client,done){
     if(err){    done();
                 return res.status(500).json({ success: false, data: err}); }
