@@ -11,6 +11,9 @@ var db          = require('./../db/pg');
 // show user homepage (w/ stored sneakers)
 sneakers.get('/:id', (req,res)=>{
   // display user_id sent from users.js
+  console.log('sneakers: '+req.params.id);
+  console.log(req.session.user);
+  res.render('users/test', { user: req.session.user });
 });
 
 

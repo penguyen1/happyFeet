@@ -41,8 +41,8 @@ app.get('/', (req,res)=>res.render('users/login'));
 
 app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 
-// Redirect to sneakers route
-// app.use('/sneakers', sneakerRoutes);
+// Redirect to RESTful routes
+app.use('/sneakers', sneakerRoutes);
 app.use('/users', userRoutes);
 
 app.listen(port, ()=>console.log('Hellllooooooo Handsome!', port));
