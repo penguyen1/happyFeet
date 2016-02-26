@@ -8,7 +8,8 @@ var bodyParser      = require('body-parser');
 var methodOverride  = require('method-override');
 var session         = require('express-session');             // user authentication
 var pgSession       = require('connect-pg-simple')(session);  // allows user login
-var connectionString = "postgres://PeterNguyen:pita@localhost/sessions";
+var pg              = require('pg');
+var connectionString = "postgres://PeterNguyen:pita@localhost/test";
 
 var db              = require('./db/pg');               // links server.js to pg.js   // did this connect?
 var app             = express();
@@ -36,9 +37,9 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-app.get('/', (req,res)=>res.render('pages/login'));
+app.get('/', (req,res)=>res.render('users/login'));
 
-app.post('/test', (req,res)=>res.send(req.body));    // test
+app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 
 // Redirect to sneakers route
 // app.use('/sneakers', sneakerRoutes);

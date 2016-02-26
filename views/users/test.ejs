@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ./../boot_partials/head %>
+  <title>Login</title>
+</head>
+<body>
+
+  <div>
+    <form action="/users/logout?_method=DELETE" method="post">
+      <button>Logout</button>
+    </form>
+  </div>
+
+  <% if(user){ %>
+    <h3>Welcome <%= user.user_id %> </h3>
+  <% } %>
+
+  
+  <%- include ./../boot_partials/footer %>
+</body>
+</html>
