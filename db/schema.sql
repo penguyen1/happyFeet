@@ -7,6 +7,7 @@ CREATE TABLE brand (
   brand_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
   headquarters VARCHAR(255)
+  -- img_url for logo?
 );
 
 CREATE TABLE users (
@@ -19,10 +20,11 @@ CREATE TABLE users (
 CREATE TABLE sneakers (
   sneaker_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
-  -- brand_id integer REFERENCES brand ON DELETE CASCADE,
+  brand_id integer REFERENCES brand ON DELETE CASCADE,
   retail_price numeric,     -- how to add monetary input
   resale_price numeric,
-  description text          -- how to add description text box?
+  description VARCHAR(255),          -- how to add description text box?
+  img_url VARCHAR(255)
 );
 
 CREATE TABLE inventory (
