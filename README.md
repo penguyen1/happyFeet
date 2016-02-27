@@ -9,17 +9,18 @@
 ### User Story:
 
 * Create a database with the following tables:
-    * **Users** - stores user `name`, `budget`, `shoe_size` & `balance`
-    * **Brand** - stores brand `name`, `founder` & `headquarters`
-    * **Sneakers** - stores sneaker `name`, `brand`, `retail_price`, `resale_price` & a brief `description` of the sneaker
+    * **Users** - stores user `name`, `shoe_size` & `balance`
+    * **Brand** - stores brand `name` & `headquarters`
+    * **Sneakers** - stores sneaker `name`, `brand_id`, `retail_price`, `resale_price`, a brief `description` & `img_url`
     * **Inventory** - joins Sneakers & Users tables storing `user_id` & `sneaker_id`
 * Create the following views:
-    * **Welcome** - home page for all visitors with a login form 
-    * **Homepage** - user's homepage displaying inventory of all their sneakers
+    * **Login** - first page a user sees. displays login form for all visitors
+    * **New User** - displays user registration for all new users 
+    * **User_Page** - user's homepage displaying inventory of their sneakers
     * **All_Sneakers** - displays all sneakers queried from user's search
     * **Sneaker** - displays profile of a sneaker
-    * **Sneaker_form** - allows user to add | edit sneaker form
-* Buttons:
+    * **Sneaker_form** - displays sneaker form allowing user to add | edit a sneaker
+* List of buttons:
     * **Login** - authenicates & pulls appropriate user information
     * **Logout** - terminates user's session
     * **New User** - displays user registration form to create a new user 
@@ -29,7 +30,26 @@
 
 ---
 
-### Programs & Softwares Used:
+### RESTful Routes
+
+## Resourse: `/users`
+* create table chart for (users) get, post, put, delete routes  
+
+||Friendly Name| Method | Route Name | What will Happen? | 
+|---|---|---|---|---|
+|1|Show Login Form | GET  | `/` | `users/login.ejs` | 
+|2|Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
+|3|Show New User Form | GET | `/new` | `users/new_user.ejs` |
+|4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
+|6|Logout | DELETE | `/logout` | redirect back to `/` login page |
+
+
+## Sneakers
+* create table chart for (sneakers) get, post, put, delete routes
+
+
+---
+### Softwares Used:
 
 * ** Express.js **
 * ** Node.js **

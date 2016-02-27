@@ -9,7 +9,7 @@ var methodOverride  = require('method-override');
 var session         = require('express-session');             // user authentication
 var pgSession       = require('connect-pg-simple')(session);  // allows user login
 var pg              = require('pg');
-var connectionString = "postgres://PeterNguyen:pita@localhost/test";
+var connectionString = "postgres://PeterNguyen:pita@localhost/sneakers";        // hide the password!
 
 var db              = require('./db/pg');               // links server.js to pg.js   // did this connect?
 var app             = express();

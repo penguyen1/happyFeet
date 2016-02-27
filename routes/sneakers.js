@@ -9,9 +9,8 @@ var db          = require('./../db/pg');
 // show sneaker profile
 
 // show user homepage (w/ stored sneakers)
-sneakers.get('/:id', (req,res)=>{
-  // display user_id sent from users.js
-  console.log('sneakers: '+req.params.id);
+sneakers.get('/', (req,res)=>{
+  // display req.session.user(member_id, email, password_digest) sent from users.js
   console.log(req.session.user);
   res.render('users/test', { user: req.session.user });
 });

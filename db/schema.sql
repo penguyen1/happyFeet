@@ -7,7 +7,7 @@ CREATE TABLE brand (
   brand_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
   headquarters VARCHAR(255)
-  -- img_url for logo?
+  -- img_url for logo?`
 );
 
 CREATE TABLE users (
