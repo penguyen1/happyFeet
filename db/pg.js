@@ -56,7 +56,10 @@ function addUser(name, shoe_size, balance){
 
 // Create a New Member
 function createUser(req, res, next) {
-  createSecure(req.body.email, req.body.password, saveUser);    // encrypt password
+  console.log(req.body.password);     // original password (with CAPS)
+  console.log(req.body.password.toLowerCase()); // lowercased password
+  
+  createSecure(req.body.email, req.body.password.toLowerCase(), saveUser);    // encrypt password
   addUser(req.body.name, req.body.shoe_size, req.body.balance); // add new member to users table
 
   function saveUser(email, hash){

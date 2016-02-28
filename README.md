@@ -5,8 +5,7 @@
 **Happy Feet** is a sneaker web application allowing users to create and budget an inventory of the hottest sneakers around. 
 
 ## NEED TO DO:
-* include ERD image
-* include Wireframe pages
+* encrypt connectionString password
 * installation manual
 * Sneaker app description summary (maybe change name?)
     * What can the user do?
@@ -25,13 +24,14 @@
     * *ERD Diagram can be found in the **Screenshots Section** below*
 
 * Create the following views:
-    * **Login** - first page a user sees. displays login form for all visitors
-    * **New User** - displays user registration for all new users 
-    * **User Page** - user's homepage displaying inventory of their sneakers
-    * **All Sneakers** - displays all sneakers queried from user's search
-    * **Sneaker** - displays profile of a sneaker
-    * **Add Sneaker** - displays sneaker form allowing user to add | edit a sneaker
-    * **Error** - displays error message and redirects user to New User page if user's email is not in the database
+    * **login** - first page a user sees. displays login form for all visitors
+    * **new_user** - displays user registration for all new users 
+    * **user_home** - user's homepage displaying inventory of their sneakers
+    * **search_results** - displays all sneakers queried from user's search
+    * **sneaker** - displays profile of a sneaker
+    * **sneaker_form** - displays sneaker form allowing user to add | edit a sneaker
+    * **error** - displays error message and redirects user to New User page if user's email is not in the database
+
 * List of buttons:
     * **Login** - authenicates & pulls appropriate user information
     * **Logout** - terminates user's session
@@ -44,53 +44,81 @@
 
 ## RESTful Routes
 
-### Resourse: `/users`
-* table chart of routes for `/users`
+### Resource: `/users`
+table chart of routes for `/users`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
-|---|---|---|---|---|
-|1| Show Login form | GET  | `/` | `users/login.ejs` | 
-|2| Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
-|3| Show New User form | GET | `/new` | `users/new_user.ejs` |
-|4| Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
+|---|---|:---:|:---:|---|
+|1| Show Login form | GET  | `/` | `users/login` | 
+|2| Verify User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
+|3| Show New User form | GET | `/new` | `users/new_user` |
+|4| Create New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
 |6| Logout | DELETE | `/logout` | redirect back to `/` login page |
+|7| Invalid Login page | n/a | `/login` | `./users/error` called from `db.loginUser` |
 
-
-### Sneakers
-* table chart of routes for `/sneakers`
+#
+### Resource: `/sneakers`
+table chart of routes for `/sneakers`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
-|---|---|---|---|---|
-|1| Show user homepage (all sneakers) | GET  | `/` | `users/login.ejs` | 
-|2| Show Sneaker profile (one sneaker) | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
-|3| Show Add Sneaker Form | GET | `/new` | `users/new_user.ejs` |
-|4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
-|6|Logout | DELETE | `/logout` | redirect back to `/` login page |
+|---|---|:---:|:---:|---|
+|1| User home page | GET | `/:user` | call `db.allSneakers`, `pages/user_home` | 
+|2| Add a new Sneaker | POST | `/new` | call `db.addSneaker`(db & inventory), redirect to `/sneakers/:user` |
+|3| Show One Sneaker | GET | `/:id` | call `db.getSneaker`, `pages/sneaker` |
+|4| Edit Sneaker | PUT | `/:id` | call `db.editSneaker`, redirect to `/sneakers/:user` |
+|5| Delete Sneaker | DELETE | `/:user/:id` | call `db.removeSneaker` (from inventory), redirect to `/sneakers/:user` |
+|6| Add Sneaker form | GET | `/new` | `pages/sneaker_form` with route to POST `/sneakers/new` |
+|7| Edit Sneaker form | GET | `/:id/edit` | `pages/sneaker_form` with route to PUT `/sneakers/:id` |
+|8| List Search Results | GET | `/search` | call `db.searchSneaker`, `pages/search_results` |
 
 ---
 
-## pg.js Functions
+## PG Module Functions
+table chart of SQL queries using PG module
+
+|| Function Name | What it does | and... | Redirect / Render to... | 
+|---|:---:|:---:|:---:|:---:|
+|1| loginUser | authenticates user email & password || `/sneakers/:user` | 
+|2| createUser | encrypts password, inserts to `members` table | inserts to `users` table | `/users/` |
+|3| allSneakers | selects all `user_id` sneakers || `pages/user_home.ejs` |
+|4| getSneaker | selects `sneaker_id` info || `pages/sneaker.ejs` |
+|5| addSneaker | inserts to `sneakers` table | inserts to `inventory` table | `/sneakers/:user` |
+|6| editSneaker | updates `sneaker_id` in `sneakers` table || `/sneakers/:user` |
+|7| removeSneaker | deletes `sneaker_id` & `user_id` from `inventory` table || `/sneakers/:user` |
+|8| searchSneaker | selects from `sneakers` table that contain the search word(s) || `pages/search_results.ejs` |
 
 --- 
 
-## Screenshots
+## Screenshots *( update! )*
 
-#### ERD Diagram: ( needs updating! )
+#### ERD Diagram: 
 ![](./images/erd.png) 
-
-#### Login Form page
-#### New User Registration Form page
-#### User Home page
-#### All Sneakers page
-#### Sneaker Profile page
-#### Add New Sneaker Form page
-#### Error page
-
-*** All images cannot be in .pdf format, use .png format instead !!
+#
+#### Login page:
+![](./images/login.png) 
+#
+#### New User Registration page:
+![](./images/new_user.png) 
+#
+#### User Home page:
+![](./images/user_home.png) 
+#
+#### Search Results page:
+![](./images/search_results.png) 
+#
+#### Sneaker Profile page:
+![](./images/sneaker_profile.png) 
+#
+#### Sneaker Form page:
+![](./images/sneaker_form.png) 
+#
+#### Error page:
+![](./images/error.png) 
+#
 
 ---
 
-## Project 2 Requirements:
+## Project Requirements:
 * **Have at _least_ 2 models:** 
     * ~~users~~
     * sneakers
@@ -100,19 +128,22 @@
     * ~~POST~~
     * PUT
     * ~~DELETE~~
-* ~~**Write full SQL queries using PG module or PG-promise module**~~
-* **Include wireframes** that you designed during the planning process
+* **Write full SQL queries using PG module or PG-promise module**
+* ~~**Include wireframes** that you designed during the planning process~~
 * ~~**Include User Stories**~~
 * ~~**Include ERDs**~~
-* ~~Have **semantically clean HTML and CSS**~~ *(always)*
+* ~~Have **semantically clean HTML and CSS**~~ *(duh, always)*
 * **Be deployed online** and accessible to the public
 
 ---
 
-### Softwares Used:
+### Programs & Softwares Used:
 
+* ** HTML **
+* ** CSS **
+* ** JavaScript **
 * ** Express.js **
 * ** Node.js **
 * ** PostgreSQL **
-* ** JavaScript **
-* ** BootStrap **
+* ** BootStrap | Semantic-UI **
+* ** Heroku **
