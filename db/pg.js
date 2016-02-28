@@ -7,16 +7,22 @@ var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep
 // User Authenication & Authorization
 // need to query for all sneakers with member_id = user_id = sneaker_id
 function loginUser(req,res,next) {
+  console.log('logging in user');
+  console.log(req.body);
   pg.connect(connectionString, function(err,client,done){
     if(err){    done();
                 return res.status(500).json({ success: false, data: err}); }
 
     var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email],
       function(err, results){
+        console.log(results.rows);
         done();
         if(err){ return console.error('error running query', err); }
         if(results.rows.length === 0){
-          res.status(204).json({ success: true, data: 'no content'});
+          console.log('im here');
+          res.render('./users/error.ejs', { data: req.body })
+          // next();
+          // res.status(204).json({ success: true, data: 'no content'});
         } else if(bcrypt.compareSync(req.body.password, results.rows[0].password_digest)){    // checks & verifies user password
           res.rows = results.rows[0];
           next();
@@ -44,7 +50,6 @@ function addUser(name, shoe_size, balance){
       function(err, results){
         done();
         if(err){ return console.error('error running query', err); }
-        next();
     })
   })
 }
