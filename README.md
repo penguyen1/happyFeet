@@ -62,14 +62,16 @@ table chart of routes for `/sneakers`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
 |---|---|:---:|:---:|---|
-|1| User home page | GET | `/:user` | call `db.allSneakers`, `pages/user_home` | 
-|2| Add a new Sneaker | POST | `/new` | call `db.addSneaker`(db & inventory), redirect to `/sneakers/:user` |
-|3| Show One Sneaker | GET | `/:id` | call `db.getSneaker`, `pages/sneaker` |
-|4| Edit Sneaker | PUT | `/:id` | call `db.editSneaker`, redirect to `/sneakers/:user` |
-|5| Delete Sneaker | DELETE | `/:user/:id` | call `db.removeSneaker` (from inventory), redirect to `/sneakers/:user` |
-|6| Add Sneaker form | GET | `/new` | `pages/sneaker_form` with route to POST `/sneakers/new` |
-|7| Edit Sneaker form | GET | `/:id/edit` | `pages/sneaker_form` with route to PUT `/sneakers/:id` |
-|8| List Search Results | GET | `/search` | call `db.searchSneaker`, `pages/search_results` |
+|1| User home page & list all Sneakers | GET | `/` | call `db.allSneakers`, render to `pages/user_home` | 
+|2| Show Add Sneaker form | GET | `/new` | render `pages/sneaker_form`, route to `/sneakers/new` |
+|3| Add a new Sneaker | POST | `/new` | call `db.addSneaker`, redirect to `/sneakers/` |
+|4| List Search Results | GET | `/search` | call `db.searchSneaker`, render to `pages/search_results` |
+|5| Show Edit Sneaker form | GET | `/:id/edit` | render `pages/sneaker_form`, route to `/sneakers/:id` |
+|6| Show Sneaker Profile | GET | `/:id` | call `db.getSneaker`, render to `pages/sneaker` |
+|7| Edit Sneaker | PUT | `/:id` | call `db.editSneaker`, redirect to `/sneakers/` |
+|8| Delete Sneaker | DELETE | `/:id` | call `db.removeSneaker`, redirect to `/sneakers/` |
+
+
 
 ---
 

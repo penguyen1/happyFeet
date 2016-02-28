@@ -23,11 +23,12 @@ users.get('/new', (req,res)=>{
 users.post('/login', db.loginUser, (req,res)=>{           // sessions are logged here
   req.session.user = res.rows;                            // stores user into sessions
   // eval(pry.it);
-  console.log(req.session.user.member_id);
+  console.log("req.session.user.member_id: " + req.session.user.member_id);
   req.session.save( ()=>res.redirect('/sneakers/') );     // must save session before redirecting!    // need to redirect to user_home page (how to get user_id??)
 });
 
 users.delete('/logout', (req,res)=>{                      // delete user session|cookie
+  console.log('logging out!');
   req.session.destroy( (err)=>res.redirect('/') );
 });
 

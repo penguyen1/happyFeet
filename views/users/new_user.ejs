@@ -7,7 +7,7 @@
 <body>
 
   <div class="ui middle aligned center aligned grid">
-    <div class="column">
+    <div class="column starter-template">
 
       <form class="ui large form" action="/users" method="post">
         <div class="ui stacked segment">
@@ -18,12 +18,13 @@
             <input type="text" name="email" placeholder="E-mail Address" required>
           </div>
           <div class="field">
-            <input type="password" name="password" placeholder="Create a new password" required>
+            <input type="password" name="password" placeholder="Create a password" required>
           </div>
-          <div class="field">
-            <input type="number" name="balance" min="0" step="any" placeholder="Starting balance amount" required>
+          <div class="field balance">
+            Balance:  $
+            <input type="number" name="balance" min="0" step="any" placeholder="xxx.xx" required>
           </div>
-          <div class="field">
+          <div class="field shoeSize"> Shoe Size: 
             <select name="shoe_size">
               <option value="5">5</option><option value="5.5">5.5</option>
               <option value="6">6</option><option value="6.5">6.5</option>
@@ -36,10 +37,8 @@
               <option value="13">13</option><option value="14">14</option>
             </select>
           </div>
-          
-          <!-- shoe size drop down  -->
           <!-- <div class="ui fluid large teal submit button">Login</div> -->
-          <input type="submit" value="Sign Me Up!" class="ui fluid large teal submit button">  <!-- Can I do: value="Sign Me Up!" ???? -->
+          <br><input type="submit" value="Sign Me Up!" class="ui fluid large teal submit button">  <!-- Can I do: value="Sign Me Up!" ???? -->
         </div>
         <div class="ui error message"></div>
       </form>

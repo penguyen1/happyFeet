@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));  // static route to css
 // Homepage Route
 app.get('/', (req,res)=>res.render('users/login'));
 
-app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
+// app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 
 // Redirect to RESTful routes
 app.use('/sneakers', sneakerRoutes);
