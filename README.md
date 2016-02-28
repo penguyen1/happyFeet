@@ -4,6 +4,15 @@
 
 **Happy Feet** is a sneaker web application allowing users to create and budget an inventory of the hottest sneakers around. 
 
+### NEED TO DO:
+* include ERD image
+* include Wireframe pages
+* installation manual
+* Sneaker app description summary (maybe change name?)
+    * What can the user do?
+    * What are the features?
+* create issues
+
 ---
 
 ### User Story:
@@ -13,6 +22,7 @@
     * **Brand** - stores brand `name` & `headquarters`
     * **Sneakers** - stores sneaker `name`, `brand_id`, `retail_price`, `resale_price`, a brief `description` & `img_url`
     * **Inventory** - joins Sneakers & Users tables storing `user_id` & `sneaker_id`
+![](./images/ERD.pdf)
 * Create the following views:
     * **Login** - first page a user sees. displays login form for all visitors
     * **New User** - displays user registration for all new users 
@@ -56,12 +66,30 @@
 |4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
 |6|Logout | DELETE | `/logout` | redirect back to `/` login page |
 
-
 ---
 
-
+### pg.js Functions
 
 --- 
+
+### Project 2 Requirements:
+* **Have at _least_ 2 models:** 
+    * ~~users~~
+    * sneakers
+* ~~**Include sign up/log in functionality**, with encrypted passwords & an authorization flow. (Using Bcrypt)~~
+* **Have complete RESTful routes:** 
+    * ~~GET~~
+    * ~~POST~~
+    * PUT
+    * ~~DELETE~~
+* ~~**Write full SQL queries using PG module or PG-promise module**~~
+* **Include wireframes** that you designed during the planning process
+* ~~**Include User Stories**~~
+* ~~**Include ERDs**~~
+* ~~Have **semantically clean HTML and CSS**~~ *(always)*
+* **Be deployed online** and accessible to the public
+
+---
 
 ### Softwares Used:
 
