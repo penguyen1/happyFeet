@@ -1,10 +1,10 @@
 # Project #2: Happy Feet
 
-### Overview
+## Overview
 
 **Happy Feet** is a sneaker web application allowing users to create and budget an inventory of the hottest sneakers around. 
 
-### NEED TO DO:
+## NEED TO DO:
 * include ERD image
 * include Wireframe pages
 * installation manual
@@ -15,14 +15,15 @@
 
 ---
 
-### User Story:
+## User Story:
 
-* Create a database with the following tables:
+* Create a database and ERD with the following tables:
     * **Users** - stores user `name`, `shoe_size` & `balance`
     * **Brand** - stores brand `name` & `headquarters`
     * **Sneakers** - stores sneaker `name`, `brand_id`, `retail_price`, `resale_price`, a brief `description` & `img_url`
     * **Inventory** - joins Sneakers & Users tables storing `user_id` & `sneaker_id`
-![](./images/ERD.pdf)
+    * *ERD Diagram can be found in the **Screenshots Section** below*
+
 * Create the following views:
     * **Login** - first page a user sees. displays login form for all visitors
     * **New User** - displays user registration for all new users 
@@ -41,38 +42,55 @@
 
 ---
 
-### RESTful Routes
+## RESTful Routes
 
-## Resourse: `/users`
+### Resourse: `/users`
 * table chart of routes for `/users`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
 |---|---|---|---|---|
-|1|Show Login Form | GET  | `/` | `users/login.ejs` | 
-|2|Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
-|3|Show New User Form | GET | `/new` | `users/new_user.ejs` |
-|4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
-|6|Logout | DELETE | `/logout` | redirect back to `/` login page |
+|1| Show Login form | GET  | `/` | `users/login.ejs` | 
+|2| Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
+|3| Show New User form | GET | `/new` | `users/new_user.ejs` |
+|4| Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
+|6| Logout | DELETE | `/logout` | redirect back to `/` login page |
 
 
-## Sneakers
+### Sneakers
 * table chart of routes for `/sneakers`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
 |---|---|---|---|---|
-|1|Show Login Form | GET  | `/` | `users/login.ejs` | 
-|2|Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
-|3|Show New User Form | GET | `/new` | `users/new_user.ejs` |
+|1| Show user homepage (all sneakers) | GET  | `/` | `users/login.ejs` | 
+|2| Show Sneaker profile (one sneaker) | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
+|3| Show Add Sneaker Form | GET | `/new` | `users/new_user.ejs` |
 |4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
 |6|Logout | DELETE | `/logout` | redirect back to `/` login page |
 
 ---
 
-### pg.js Functions
+## pg.js Functions
 
 --- 
 
-### Project 2 Requirements:
+## Screenshots
+
+#### ERD Diagram: ( needs updating! )
+![](./images/erd.png) 
+
+#### Login Form page
+#### New User Registration Form page
+#### User Home page
+#### All Sneakers page
+#### Sneaker Profile page
+#### Add New Sneaker Form page
+#### Error page
+
+*** All images cannot be in .pdf format, use .png format instead !!
+
+---
+
+## Project 2 Requirements:
 * **Have at _least_ 2 models:** 
     * ~~users~~
     * sneakers
