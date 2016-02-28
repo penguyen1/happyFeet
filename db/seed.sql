@@ -77,26 +77,26 @@ INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, im
     VALUES('Nike Air Max 90 - Lunar', 2, 150, 1000, 'Created with the iconic Air Max 90, this exclusively limited edition shoe was designed in honor of American Astronaut, Neil Armstrong.', 'https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/n/i/nike_air_max_lunar90_sp_700098-007_1_1.png');
 
       -- Adidas
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
-INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
+-- INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES('Jordan', 3, , '', '');
 
 
 

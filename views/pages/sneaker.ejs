@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Sneaker Profile</title>
+    <%- include ../boot_partials/head %>
+  </head>
+
+  <body>
+    <header>
+      <%- include ../boot_partials/nav %>
+    </header>
+    
+    <h1> Sneaker Profile page </h1>
+    <div class="container">
+      <div class="starter-template">
+
+        <img src="<%= data.img_url %>">
+        <div> <%= data.name %> </div>
+        <div> <%= data.brand_id %> </div>
+<!--    <div> <%= data.shoe_size %> </div>     this is from users table... necessary? -->
+        <div> <%= data.retail_value %> </div>
+        <div> <%= data.resale_value %> </div>
+        <div> <%= data.description %> </div>
+
+      </div>
+    </div><!-- /.container -->
+
+    <%- include ../boot_partials/footer %>
+  </body>
+</html>
+
+
+

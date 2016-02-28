@@ -13,9 +13,9 @@ var db          = require('./../db/pg');
 // can i get req.session.user.member_id in pg.js?
 
 // show user homepage (+ inventoried sneakers)
-sneakers.get('/', /* db.allSneakers, */(req,res)=>{
-  res.render('users/test', { user: req.session.user });         // testing
-  // res.render('pages/user_home', { data: res.rows });         // display all queried sneakers 
+sneakers.get('/', db.allSneakers, (req,res)=>{
+  // res.render('users/test', { user: req.session.user });         // testing
+  res.render('pages/user_home', { data: res.rows });         // display all queried sneakers 
 });
 
 // show add sneaker form
@@ -27,7 +27,7 @@ sneakers.route('/new')
                 buttonTitle: 'Add Sneaker'  }
     });
   })
-  .post(/*db.addSneaker,*/(req,res)=>{
+  .post(db.addSneaker,(req,res)=>{
     res.redirect('/sneakers/');
   });
 
