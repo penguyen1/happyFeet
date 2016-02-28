@@ -16,10 +16,11 @@
 * Create the following views:
     * **Login** - first page a user sees. displays login form for all visitors
     * **New User** - displays user registration for all new users 
-    * **User_Page** - user's homepage displaying inventory of their sneakers
-    * **All_Sneakers** - displays all sneakers queried from user's search
+    * **User Page** - user's homepage displaying inventory of their sneakers
+    * **All Sneakers** - displays all sneakers queried from user's search
     * **Sneaker** - displays profile of a sneaker
-    * **Sneaker_form** - displays sneaker form allowing user to add | edit a sneaker
+    * **Add Sneaker** - displays sneaker form allowing user to add | edit a sneaker
+    * **Error** - displays error message and redirects user to New User page if user's email is not in the database
 * List of buttons:
     * **Login** - authenicates & pulls appropriate user information
     * **Logout** - terminates user's session
