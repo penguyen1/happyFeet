@@ -34,7 +34,7 @@
 ### RESTful Routes
 
 ## Resourse: `/users`
-* create table chart for (users) get, post, put, delete routes  
+* table chart of routes for `/users`
 
 ||Friendly Name| Method | Route Name | What will Happen? | 
 |---|---|---|---|---|
@@ -46,10 +46,23 @@
 
 
 ## Sneakers
-* create table chart for (sneakers) get, post, put, delete routes
+* table chart of routes for `/sneakers`
+
+||Friendly Name| Method | Route Name | What will Happen? | 
+|---|---|---|---|---|
+|1|Show Login Form | GET  | `/` | `users/login.ejs` | 
+|2|Authenicate User login | POST | `/login` | call `db.loginUser`, redirect to `/sneakers/:id` |
+|3|Show New User Form | GET | `/new` | `users/new_user.ejs` |
+|4|Create a New User | POST | `/` | call `db.createUser`, redirect to `/` login page |
+|6|Logout | DELETE | `/logout` | redirect back to `/` login page |
 
 
 ---
+
+
+
+--- 
+
 ### Softwares Used:
 
 * ** Express.js **
