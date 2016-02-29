@@ -3,6 +3,7 @@ var express     = require('express');
 var sneakers    = express.Router();
 var bodyParser  = require('body-parser');
 var db          = require('./../db/pg');
+var dotenv          = require('dotenv');
 
 // member_id = req.session.user.member_id 
 // sneaker_id = req.params.id
