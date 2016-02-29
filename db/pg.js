@@ -9,7 +9,7 @@ function loginUser(req,res,next) {
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-    var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email],
+    var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email.toLowerCase()],
       function(err, results){   
         done();
         if(err){ return console.error('error running query', err); }
@@ -26,7 +26,7 @@ function loginUser(req,res,next) {
   })
 }
 
-// Encrypts password
+// Bcrypt password
 function createSecure(email, password, callback) {      // hashing password given by user at sign up                                  
   bcrypt.genSalt(function(err,salt){
     bcrypt.hash(password, salt, function(err,hash){
@@ -35,7 +35,7 @@ function createSecure(email, password, callback) {      // hashing password give
   })
 }
 
-// Add new member to users table    -- now, member_id = user_id
+// Add new member to users table (member_id = user_id)
 function addUser(name, shoe_size, balance){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();    return res.status(500).json({ success: false, data: err}); }
@@ -47,9 +47,16 @@ function addUser(name, shoe_size, balance){
   })
 }
 
+// Verifies email hasnt been taken yet
+function verifyUniqEmail(){
+
+}
+
 // Create a New Member
 function createUser(req, res, next) {
   // query users table if this email already exists
+  eval(pry.it);
+  verifyUniqEmail();      // send email and search database for results -> render back to new_user if taken
   // if yes, return error message and ask to use a different email
   // if no, continue
     // if(results.rows.length > 0){
@@ -57,9 +64,9 @@ function createUser(req, res, next) {
     //   res.render('./users/error.ejs', { data: req.body })
     // }
 
-  // arent passwords supposed to be case-sensitive? wouldnt .toLowerCase() conflict with that ??
+  
   createSecure(req.body.email, req.body.password.toLowerCase(), saveUser);    // encrypt password
-  addUser(req.body.name, req.body.shoe_size, req.body.balance); // add new member to users table
+  addUser(req.body.name, req.body.shoe_size, req.body.balance);               // add new member to users table
 
   function saveUser(email, hash){
     pg.connect(connectionString, function(err,client,done){
