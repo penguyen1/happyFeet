@@ -12,7 +12,7 @@ users.post('/', db.createUser, (req,res)=>{
 });
 
 users.get('/new', (req,res)=>{
-  res.render('users/new_user');     // redirect to new_user form
+  res.render('users/new_user', { data: '' });     // redirect to new_user form
 });
 
 // users.get('/login', (req,res)=>{    // used to be redirected from .post('/'), but now not needed.

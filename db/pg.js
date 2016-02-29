@@ -47,24 +47,18 @@ function addUser(name, shoe_size, balance){
   })
 }
 
-// Verifies email hasnt been taken yet
-function verifyUniqEmail(){
-
-}
-
 // Create a New Member
 function createUser(req, res, next) {
   // query users table if this email already exists
-  eval(pry.it);
-  verifyUniqEmail();      // send email and search database for results -> render back to new_user if taken
-  // if yes, return error message and ask to use a different email
-  // if no, continue
+
+  verifyUniqEmail(req.body.email);      // send email and search database for results -> render back to new_user if taken
+  // if > 0, return error message and ask to use a different email
+  // if 0, continue
     // if(results.rows.length > 0){
     //   console.log('This email is already taken. Please register with a different email!');
     //   res.render('./users/error.ejs', { data: req.body })
     // }
 
-  
   createSecure(req.body.email, req.body.password.toLowerCase(), saveUser);    // encrypt password
   addUser(req.body.name, req.body.shoe_size, req.body.balance);               // add new member to users table
 
@@ -80,6 +74,26 @@ function createUser(req, res, next) {
       })
     })
   }
+
+  // Verifies email hasnt been taken yet
+  function verifyUniqEmail(email){
+    pg.connect(connectionString, function(err,client,done){
+      if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+      // query for all members where email like '%new_user_email_input'
+      var confirmUniqEmail = client.query("SELECT * FROM members WHERE email LIKE ($1);", ['%'+email],
+        function(err, results){
+          done();
+          if(err){ return console.error('error running query', err); }
+          if(results.rows.length !== 0){ 
+            res.render('./users/new_user', { data: 'This email is already in use. Please try again with a different email.' }); 
+          } else {  next(); }
+
+          // results.rows.length 
+          //   ? (res.render('./users/new', { data: 'This email is already in use. Please try again with a different email.' });)
+          //   : next();
+        })
+    })
+  }
 }
 
 // need to query for all sneakers with member_id = user_id = sneaker_id
@@ -91,13 +105,19 @@ function allSneakers(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
+    var getUserID = client.query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1;", 
+      function(err, results){
+        done();
+        // console.log(results.rows);
+        eval(pry.it);
+    });
     var getUserSneakers = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
         done();
         if(err){ return console.error('error running query', err); }
         res.rows = results.rows;
         next();
-      })
+    });
   })
 }
 

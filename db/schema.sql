@@ -13,7 +13,7 @@ CREATE TABLE brand (
 CREATE TABLE users (
   user_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
-  shoe_size integer, 
+  shoe_size numeric, 
   balance numeric
 );
 
