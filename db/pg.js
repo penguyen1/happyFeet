@@ -41,8 +41,7 @@ function createSecure(email, password, callback) {      // hashing password give
 // Add new member to users table    -- now, member_id = user_id
 function addUser(name, shoe_size, balance){
   pg.connect(connectionString, function(err,client,done){
-    if(err){  done();
-              return res.status(500).json({ success: false, data: err}); }
+    if(err){  done();    return res.status(500).json({ success: false, data: err}); }
     var query = client.query("INSERT INTO users(name, shoe_size, balance) VALUES ($1,$2,$3);", [name, shoe_size, balance], 
       function(err, results){
         done();
@@ -67,8 +66,7 @@ function createUser(req, res, next) {
 
   function saveUser(email, hash){
     pg.connect(connectionString, function(err,client,done){
-      if(err){  done();
-                return res.status(500).json({ success: false, data: err}); }
+      if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
       var query = client.query("INSERT INTO members(email, password_digest) VALUES ($1,$2);", [email, hash], 
         function(err, results){
@@ -89,7 +87,7 @@ function allSneakers(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-    var query = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
+    var getUserSneakers = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
         done();
         if(err){ return console.error('error running query', err); }
@@ -104,7 +102,7 @@ function addInventory(user_id, sneaker_id){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
     
-    var addToInventoryTable = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [user_id, sneaker_id], 
+    var addToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [user_id, sneaker_id], 
       function(err, results){
         done();
         if(err){ return console.error('error running query', err); }
@@ -121,7 +119,7 @@ function addSneaker(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
     // insert into sneakers table (step1)
-    var addToSneakerTable = client.query("INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES ($1,$2,$3,$4,$5,$6);", 
+    var addToSneakers = client.query("INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) VALUES ($1,$2,$3,$4,$5,$6);", 
       [req.body.name, req.body.brand_id, req.body.retail_price, req.body.resale_price, req.body.description, req.body.img_url], 
       function(err, results){
         done();
@@ -129,7 +127,7 @@ function addSneaker(req, res, next){
     });
 
     // get most recent sneaker_id from sneakers table (step2)
-    var last = client.query("SELECT sneaker_id FROM sneakers ORDER BY sneaker_id DESC LIMIT 1;",
+    var lastSneakerID = client.query("SELECT sneaker_id FROM sneakers ORDER BY sneaker_id DESC LIMIT 1;",
       function(err, results){
         var sneakerID = results.rows[0].sneaker_id; 
         addInventory(Uid, sneakerID);     // insert into inventory table (step3)
@@ -149,12 +147,12 @@ function getSneaker(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-    var query = client.query("SELECT users.shoe_size, brand.name AS brand_name, s.sneaker_id, s.name AS snkr_name," +
-                                " s.retail_price, s.resale_price, s.description, s.img_url FROM sneakers AS s " +
-                                "INNER JOIN brand ON brand.brand_id = s.brand_id " +
-                                "INNER JOIN inventory ON inventory.sneaker_id = s.sneaker_id " +
-                                "INNER JOIN users ON inventory.user_id = users.user_id " +
-                                "WHERE s.sneaker_id=($1);", [req.params.id],
+    var getSneaker = client.query("SELECT users.shoe_size, brand.name AS brand_name, s.sneaker_id, s.name AS snkr_name," +
+                                  " s.retail_price, s.resale_price, s.description, s.img_url FROM sneakers AS s " +
+                                  "INNER JOIN brand ON brand.brand_id = s.brand_id " +
+                                  "INNER JOIN inventory ON inventory.sneaker_id = s.sneaker_id " +
+                                  "INNER JOIN users ON inventory.user_id = users.user_id " +
+                                  "WHERE s.sneaker_id=($1);", [req.params.id],
       function(err, results){ 
         done();
         if(err){ return console.error('error running query', err); }
@@ -168,7 +166,19 @@ function getSneaker(req, res, next){
 function editSneaker(req, res, next){
   var Uid = req.session.user.member_id;
   console.log('editSneaker: ' + Uid);
+  
   // update sneakers table set col1=($1), col2=($2), etc. where sneaker_id=($7)
+  pg.connect(connectionString, function(err,client,done){
+    if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+    // insert into sneakers table (step1)
+    var updateSneaker = client.query("UPDATE sneakers SET name=($1), brand_id=($2), retail_price=($3), resale_price=($4), description=($5), img_url=($6) WHERE sneaker_id=($7);",
+      [req.body.name, req.body.brand_id, req.body.retail_price, req.body.resale_price, req.body.description, req.body.img_url, req.params.id], 
+      function(err, results){
+        done();
+        if(err){ return console.error('error running query', err); }
+        next();
+    });
+  })
 }
 
 // remove sneaker
@@ -198,6 +208,19 @@ module.exports.addSneaker = addSneaker;
 module.exports.editSneaker = editSneaker;
 module.exports.removeSneaker = removeSneaker;
 module.exports.searchSneaker = searchSneaker;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

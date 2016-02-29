@@ -52,7 +52,7 @@ sneakers.route('/:id')
   .get(db.getSneaker, (req,res)=>{
     res.render('pages/sneaker', { data: res.rows[0] });
   })
-  .put(/*db.editSneaker,*/ (req,res)=>{
+  .put(db.editSneaker, (req,res)=>{
     res.redirect('/sneakers/');
   })
   .delete(/*db.removeSneaker,*/ (req,res)=>{
