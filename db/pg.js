@@ -228,11 +228,11 @@ function searchSneaker(req, res, next){
   var search = req.query.search.split(' '); // string -> array  ['yeezy', 'FLYKNIT']
   var allResults = [];
 
-  // search.forEach(function(word){
+  search.forEach(function(word){
     pg.connect(connectionString, function(err,client,done){
       if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-      client.query("SELECT * FROM sneakers WHERE name ILIKE ($1);", ['%'+search[0]+'%'],
+      client.query("SELECT * FROM sneakers WHERE name ILIKE ($1);", ['%'+word+'%'],
         function(err, results){
           done();
           if(err){ return console.error('error running query', err); }
@@ -240,11 +240,12 @@ function searchSneaker(req, res, next){
           results.rows.forEach(function(sneaker){
             allResults.push(sneaker);
           });
-          eval(pry.it);
       });
       res.rows = allResults;
+
     });
-  // });
+  });
+  eval(pry.it);
   next();   // go back to ('/sneakers/search')
 
 }
