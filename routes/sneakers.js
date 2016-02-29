@@ -32,7 +32,11 @@ sneakers.route('/new')
   });
 
 // show all queried sneakers from search
-sneakers.get('/search', /*db.searchSneaker,*/ (req,res)=>{
+sneakers.get('/search', db.searchSneaker, (req,res)=>{
+  // res.render('pages/search_results', { data: res.rows });
+  // eval(pry.it);
+  console.log('finitoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo!!');
+  // eval(pry.it);
   res.render('pages/search_results', { data: res.rows });
 });
 

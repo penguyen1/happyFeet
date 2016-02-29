@@ -103,7 +103,7 @@ function allSneakers(req, res, next){
       function(err, results){
         done();
         // console.log(results.rows);
-        eval(pry.it);
+        // eval(pry.it);
     });
     var getUserSneakers = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
@@ -218,15 +218,35 @@ function removeSneaker(req, res, next){
 }
 
 // search sneaker 
+  // select * from sneakers where name ILIKE '%white%';
 function searchSneaker(req, res, next){
   var Uid = req.session.user.member_id;
   console.log('searchSneaker: ' + Uid);
-  // convert search input string into an array & split by white spaces(?)
-  // for each word, query sneakers table where sneaker.name LIKE ($1), [search[i]], function(err, results){
-    // get results.rows.length 
-    // for( var i in results.rows ){ append results.rows[i] into res.rows }
-  // }
-  // next();        -- where do we put done()?
+  // what does the search look it? --> /sneakers/search?search=yeezy+flyknits
+  // where is it coming from?? -->  var search = req.query.search 
+
+  var search = req.query.search.split(' '); // string -> array  ['yeezy', 'FLYKNIT']
+  var allResults = [];
+
+  // search.forEach(function(word){
+    pg.connect(connectionString, function(err,client,done){
+      if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+
+      client.query("SELECT * FROM sneakers WHERE name ILIKE ($1);", ['%'+search[0]+'%'],
+        function(err, results){
+          done();
+          if(err){ return console.error('error running query', err); }
+
+          results.rows.forEach(function(sneaker){
+            allResults.push(sneaker);
+          });
+          eval(pry.it);
+      });
+      res.rows = allResults;
+    });
+  // });
+  next();   // go back to ('/sneakers/search')
+
 }
 
 module.exports.createUser = createUser;

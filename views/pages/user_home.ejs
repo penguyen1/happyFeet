@@ -15,9 +15,14 @@
     <div class="container">
       <div class="starter-template">
         <h1> User Home Page </h1>
-        <% console.log(data) %>
+
+        <!-- search box -->
+        <form action="/sneakers/search" method="get">
+          <input type="search" name="search" placeholder="Search sneaker">
+        </form>
+
         <% if(data.length) { %>
-          <% for(var i in data) { %>           <!-- use semantic card template? -->
+          <% for(var i in data) { %><!-- use semantic card template? -->
             <div> <!-- each sneaker -->
               <div>
                 <a href="/sneakers/<%= data[i].sneaker_id%>">
