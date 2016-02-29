@@ -1,5 +1,19 @@
 var pg                = require('pg');
-var connectionString  = "postgres://PeterNguyen:pita@localhost/sneakers";           // hide the password!!
+var connectionString  = "postgres://PeterNguyen:pita@localhost/sneakers";      
+
+// USE THIS WHEREVER YOU USE THE DATABASE !!
+// if(process.env.ENVIRONMENT === 'production'){     // in heroku: add environment = production in config variables
+//   var config = process.env.DATABASE_URL;
+// } else {                                          // in local  
+//   var connectionString = {
+//     host: process.env.DB_HOST,
+//     port: process.env.DB_PORT,
+//     database: process.env.DB_NAME,
+//     user: process.env.DB_USER,
+//     password: process.env.DB_PASS
+//   }
+// }
+
 var session           = require('express-session');
 var bcrypt            = require('bcrypt');
 var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep

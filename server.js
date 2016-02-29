@@ -11,6 +11,10 @@ var pgSession       = require('connect-pg-simple')(session);  // allows user log
 var pg              = require('pg');
 var connectionString = "postgres://PeterNguyen:pita@localhost/sneakers";        // hide the password!
 
+// if(!process.env.PORT){
+//   require('dotenv').config();
+// }
+
 var db              = require('./db/pg');               // links server.js to pg.js   // did this connect?
 var app             = express();
 var port            = process.env.PORT || 3000;
