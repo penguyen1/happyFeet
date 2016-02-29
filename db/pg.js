@@ -49,15 +49,11 @@ function addUser(name, shoe_size, balance){
 
 // Create a New Member
 function createUser(req, res, next) {
-  // query users table if this email already exists
+  // verifies if new_user email is unique & not already used by another user
+  verifyUniqEmail(req.body.email);      
+  // send email and search database for results -> render back to new_user if taken
+  // if > 0, return error message and ask to use a different email. otherise, continue to createSecure & addUser
 
-  verifyUniqEmail(req.body.email);      // send email and search database for results -> render back to new_user if taken
-  // if > 0, return error message and ask to use a different email
-  // if 0, continue
-    // if(results.rows.length > 0){
-    //   console.log('This email is already taken. Please register with a different email!');
-    //   res.render('./users/error.ejs', { data: req.body })
-    // }
 
   createSecure(req.body.email, req.body.password.toLowerCase(), saveUser);    // encrypt password
   addUser(req.body.name, req.body.shoe_size, req.body.balance);               // add new member to users table
@@ -84,14 +80,12 @@ function createUser(req, res, next) {
         function(err, results){
           done();
           if(err){ return console.error('error running query', err); }
+          
           if(results.rows.length !== 0){ 
             res.render('./users/new_user', { data: 'This email is already in use. Please try again with a different email.' }); 
           } else {  next(); }
-
-          // results.rows.length 
-          //   ? (res.render('./users/new', { data: 'This email is already in use. Please try again with a different email.' });)
-          //   : next();
-        })
+      // (!results.rows.length) ? next() : res.render('./users/new', { data: 'This email is already in use. Please try again with a different email.' });
+      })
     })
   }
 }
