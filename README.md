@@ -30,15 +30,15 @@
     * **search_results** - displays all sneakers queried from user's search
     * **sneaker** - displays profile of a sneaker
     * **sneaker_form** - displays sneaker form allowing user to add | edit a sneaker
-    * **error** - displays error message and redirects user to New User page if user's email is not in the database
+    * ~~**error** - displays error message and redirects user to New User page if user's email is not in the database~~
 
 * List of buttons:
-    * **Login** - authenicates & pulls appropriate user information
-    * **Logout** - terminates user's session
-    * **New User** - displays user registration form to create a new user 
+    * **Log In** - authenicates & pulls appropriate user information
+    * **Log Out** - terminates user's session
+    * **Create New User** - displays user registration form to create a new user 
     * **Add Sneaker** - displays sneaker form to create & add a new sneaker 
-    * **Edit** - edits current sneaker information
-    * **Delete** - removes current sneaker from database
+    * **Edit Sneaker** - edits current sneaker information
+    * **Delete Sneaker** - removes current sneaker from database
 
 ---
 
@@ -123,16 +123,16 @@ table chart of SQL queries using PG module
 ## Project Requirements:
 * **Have at _least_ 2 models:** 
     * ~~users~~
-    * sneakers
+    * ~~sneakers~~ ( except searchSneakers )
 * ~~**Include sign up/log in functionality**, with encrypted passwords & an authorization flow. (Using Bcrypt)~~
-* **Have complete RESTful routes:** 
+* ~~**Have complete RESTful routes:** ~~
     * ~~GET~~
     * ~~POST~~
-    * PUT
+    * ~~PUT~~
     * ~~DELETE~~
-* **Write full SQL queries using PG module or PG-promise module**
+* ~~**Write full SQL queries using PG module or PG-promise module**~~ ( need to finish searchSneaker function )
 * ~~**Include wireframes** that you designed during the planning process~~
-* ~~**Include User Stories**~~
+* ~~**Include & Update User Stories**~~
 * ~~**Include ERDs**~~
 * ~~Have **semantically clean HTML and CSS**~~ *(duh, always)*
 * **Be deployed online** and accessible to the public
