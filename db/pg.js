@@ -144,8 +144,24 @@ function addSneaker(req, res, next){
 function getSneaker(req, res, next){
   var Uid = req.session.user.member_id;
   console.log('getSneaker: ' + Uid);
-  // query for all sneaker info from sneakers where sneaker_id = ($1)
-  // do we need to join inventory table too? bc of different users?
+
+  // query sneaker_id from sneakers where sneaker_id = req.params.id (route that called this function)
+  pg.connect(connectionString, function(err,client,done){
+    if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+
+    var query = client.query("SELECT users.shoe_size, brand.name AS brand_name, s.sneaker_id, s.name AS snkr_name," +
+                                " s.retail_price, s.resale_price, s.description, s.img_url FROM sneakers AS s " +
+                                "INNER JOIN brand ON brand.brand_id = s.brand_id " +
+                                "INNER JOIN inventory ON inventory.sneaker_id = s.sneaker_id " +
+                                "INNER JOIN users ON inventory.user_id = users.user_id " +
+                                "WHERE s.sneaker_id=($1);", [req.params.id],
+      function(err, results){ 
+        done();
+        if(err){ return console.error('error running query', err); }
+        res.rows = results.rows;
+        next();
+      })
+  })
 }
 
 // edit sneaker
@@ -182,6 +198,11 @@ module.exports.addSneaker = addSneaker;
 module.exports.editSneaker = editSneaker;
 module.exports.removeSneaker = removeSneaker;
 module.exports.searchSneaker = searchSneaker;
+
+
+
+
+
 
 
 

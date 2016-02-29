@@ -20,7 +20,9 @@
           <% for(var i in data) { %>           <!-- use semantic card template? -->
             <div> <!-- each sneaker -->
               <div>
-                <img src=<%= data[i].img_url %>>  <!-- width & height ?? -->
+                <a href="/sneakers/<%= data[i].sneaker_id%>">
+                  <img src=<%= data[i].img_url %>> 
+                </a>   <!-- width & height ?? -->
                 <div>Name: <%= data[i].name %> </div>
                 <span>Sneaker ID: <%= data[i].sneaker_id %> </span>
               </div>
