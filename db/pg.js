@@ -19,6 +19,7 @@ var bcrypt            = require('bcrypt');
 var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep
 
 // User Authenication & Authorization
+// Credit: taken from User-Auth classwork by Colin Hart
 function loginUser(req,res,next) {
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
@@ -26,9 +27,7 @@ function loginUser(req,res,next) {
     var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email.toLowerCase()],
       function(err, results){   
         done();
-        if(err){ return console.error('error running query', err); }
         if(results.rows.length === 0){
-          console.log('email does not exist in users db table');
           res.render('./users/login.ejs', { data: 'Oops! This email does not exist!' });
         } else if(bcrypt.compareSync(req.body.password, results.rows[0].password_digest)){    // checks & verifies user password
           res.rows = results.rows[0];
@@ -53,10 +52,10 @@ function createSecure(email, password, callback) {      // hashing password give
 function addUser(name, shoe_size, balance){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();    return res.status(500).json({ success: false, data: err}); }
+
     var query = client.query("INSERT INTO users(name, shoe_size, balance) VALUES ($1,$2,$3);", [name, shoe_size, balance], 
       function(err, results){
-        done();
-        if(err){ return console.error('error running query', err); }
+        done();   if(err){ return console.error('error running query', err); }
     })
   })
 }
@@ -65,10 +64,6 @@ function addUser(name, shoe_size, balance){
 function createUser(req, res, next) {
   // verifies if new_user email is unique & not already used by another user
   verifyUniqEmail(req.body.email);      
-  // send email and search database for results -> render back to new_user if taken
-  // if > 0, return error message and ask to use a different email. otherise, continue to createSecure & addUser
-
-
   createSecure(req.body.email, req.body.password.toLowerCase(), saveUser);    // encrypt password
   addUser(req.body.name, req.body.shoe_size, req.body.balance);               // add new member to users table
 
@@ -89,6 +84,7 @@ function createUser(req, res, next) {
   function verifyUniqEmail(email){
     pg.connect(connectionString, function(err,client,done){
       if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+      
       // query for all members where email like '%new_user_email_input'
       var confirmUniqEmail = client.query("SELECT * FROM members WHERE email LIKE ($1);", ['%'+email],
         function(err, results){
@@ -98,7 +94,6 @@ function createUser(req, res, next) {
           if(results.rows.length !== 0){ 
             res.render('./users/new_user', { data: 'This email is already in use. Please try again with a different email.' }); 
           } else {  next(); }
-      // (!results.rows.length) ? next() : res.render('./users/new', { data: 'This email is already in use. Please try again with a different email.' });
       })
     })
   }
@@ -107,14 +102,12 @@ function createUser(req, res, next) {
 // need to query for all sneakers with member_id = user_id = sneaker_id
 function allSneakers(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('allSneakers: ' + Uid);
 
   // query for all sneakers where member_id = user_id AND user_id = sneaker_id (join users, inventory & sneakers)
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-    var getUserID = client.query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1;", 
-      function(err, results){ done() });
+    var getUserID = client.query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1;", function(err, results){ done() });
 
     var getUserSneakers = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
@@ -130,19 +123,14 @@ function addInventory(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
-    console.log('adding to inventory, user_id: ' + req.session.user.member_id);
-    console.log('adding to inventory, sneaker_id: ' + req.params.id);
-
-    var addToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [req.session.user.member_id, req.params.id], 
-      function(err, results){ done(); next(); });
+    var addToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", 
+      [req.session.user.member_id, req.params.id], function(err, results){ done(); next(); });
   })
 }
 
 // add sneaker
 function addSneaker(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('addSneaker: ' + Uid);
-  console.log(req.body);
 
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
@@ -161,8 +149,8 @@ function addSneaker(req, res, next){
         var sneakerID = results.rows[0].sneaker_id;     // the most recently added sneaker_id 
 
         // add to inventory table (step3)
-        var insertToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [Uid, sneakerID],
-          function(err, results){ done() });
+        var insertToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", 
+          [Uid, sneakerID], function(err, results){ done() });
         next();
     });
   })
@@ -171,7 +159,6 @@ function addSneaker(req, res, next){
 // get sneaker profile 
 function getSneaker(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('getSneaker: ' + Uid);
 
   // query sneaker_id from sneakers where sneaker_id = req.params.id (route that called this function)
   pg.connect(connectionString, function(err,client,done){
@@ -186,8 +173,7 @@ function getSneaker(req, res, next){
       function(err, results){ 
         done();
         if(err){ return console.error('error running query', err); }
-        res.rows = results.rows;
-        // eval(pry.it)
+        res.rows = results.rows[0];
         next();
       })
   })
@@ -196,7 +182,6 @@ function getSneaker(req, res, next){
 // edit sneaker
 function editSneaker(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('editSneaker: ' + Uid);
   
   // update sneakers table set col1=($1), col2=($2), etc. where sneaker_id=($7)
   pg.connect(connectionString, function(err,client,done){
@@ -215,13 +200,13 @@ function editSneaker(req, res, next){
 // remove sneaker
 function removeSneaker(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('removeSneaker: ' + Uid);
 
   // delete from inventory table where sneaker_id=($1) AND user_id=($2)
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
     
-    var removeSneaker = client.query("DELETE FROM inventory WHERE user_id=($1) AND sneaker_id=($2);", [req.session.user.member_id, req.params.id], 
+    var removeSneaker = client.query("DELETE FROM inventory WHERE user_id=($1) AND sneaker_id=($2);", 
+      [req.session.user.member_id, req.params.id], 
       function(err, results){
         done();
         if(err){ return console.error('error running query', err); }
@@ -234,10 +219,8 @@ function removeSneaker(req, res, next){
 // Query commands were possible with help from Peter - thank you!!
 function searchSneaker(req, res, next){
   var Uid = req.session.user.member_id;
-  console.log('searchSneaker: ' + Uid);
-
   var allResults = [];
-  var search = req.query.search.split(' '); // string -> array  ['yeezy', 'FLYKNIT']
+  var search = req.query.search.split(' ');         // string -> array
   var client = new pg.Client(connectionString);     // create new database connection
 
   client.on('drain', client.end.bind(client));      // 'drain' (EventListener) - closes database connection
@@ -253,7 +236,6 @@ function searchSneaker(req, res, next){
       allResults.push(sneaker);
     });
   });
-
   client.connect();       // initializes connection to database
 }
 

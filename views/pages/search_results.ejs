@@ -19,16 +19,16 @@
           <input type="search" name="search" placeholder="Search sneaker">
         </form>
 
-        <% console.log(data) %>
-
         <% if(data.length) { %>
           <% for(var i in data) { %><!-- use semantic card template? -->
             <div> <!-- each sneaker -->
               <div>
                 <img src=<%= data[i].img_url %>> 
                 <div>Name: <%= data[i].name %> </div>
-                <span>Sneaker ID: <%= data[i].sneaker_id %> </span> <!-- delete -->
+                <!-- <span>Sneaker ID: <%= data[i].sneaker_id %> </span> -->
               </div>
+
+              <!-- Add sneaker button -->
               <form action=<%= data[i].sneaker_id %> method="post">
                 <button> Add </button>
               </form>
@@ -38,11 +38,8 @@
           <h4> Sorry, no results found. </h4>
         <% } %>
 
-
-
       </div>
     </div><!-- /.container -->
-
     <%- include ../boot_partials/footer %>
   </body>
 </html>

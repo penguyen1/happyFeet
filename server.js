@@ -15,7 +15,7 @@ var connectionString = "postgres://PeterNguyen:pita@localhost/sneakers";        
 //   require('dotenv').config();
 // }
 
-var db              = require('./db/pg');               // links server.js to pg.js   // did this connect?
+var db              = require('./db/pg');               // links server.js to pg.js
 var app             = express();
 var port            = process.env.PORT || 3000;
 var sneakerRoutes   = require(path.join(__dirname, '/routes/sneakers'));    // directory path to sneakers.js!
@@ -41,13 +41,27 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-// if a session exists, redirect to ('/sneakers/'), else continue
 app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
-
-// app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 
 // Redirect to RESTful routes
 app.use('/sneakers', sneakerRoutes);
 app.use('/users', userRoutes);
 
 app.listen(port, ()=>console.log('Hellllooooooo Handsome!', port));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

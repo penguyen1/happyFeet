@@ -1,9 +1,8 @@
 -- brand
-INSERT INTO brand (name, headquarters) VALUES ('Jordan', 'Beaverton, Oregon, USA');
+INSERT INTO brand (name, headquarters) VALUES ('Air Jordan', 'Beaverton, Oregon, USA');
 INSERT INTO brand (name, headquarters) VALUES ('Nike', 'Beaverton, Oregon, USA');
 INSERT INTO brand (name, headquarters) VALUES ('Adidas', 'Herzogenaurach, Germany');
 
--- sneakers
         --Jordan
 INSERT INTO sneakers(name, brand_id, retail_price, resale_price, description, img_url) 
     VALUES('Air Jordan 1 - Banned Bred', 1, 140, 2000, 'One of the first original Jordans worn by Michael Jordan, and the first banned shoe in NBA history for violating the NBA\s uniformity of uniform rule.', 'https://www.stadiumgoods.com/media/catalog/product/cache/1/base/1000x600/9df78eab33525d08d6e5fb8d27136e95/a/i/air_jordan_1_retro_high_ban_432001-001_1.png');
