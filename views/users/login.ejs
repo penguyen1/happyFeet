@@ -6,8 +6,8 @@
 </head>
 <body>
 
-  <div class="ui middle aligned center aligned grid">
-    <h1> Welcome! Please Log In </h1>
+  <div class="ui middle aligned center aligned grid starter-template">
+    <h2> Welcome! Please Log In </h2><br><br>
     <div class="column">
       <!-- b64 here -->
       <form class="ui large form" action="/users/login" method="post">
@@ -15,24 +15,23 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail Address">
+              <input type="email" name="email" placeholder="E-mail Address"> 
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
               <input type="password" name="password" placeholder="Password">
+            </div><br>
+            <div class="ui message"> 
+              <%= data %><br><a href="/users/new">Sign Up Here!</a> 
             </div>
           </div>
           <!-- <div class="ui fluid large teal submit button">Login</div> -->
-          <input type="submit" value="Submit" class="ui fluid large teal submit button">
+          <br><input type="submit" value="Submit" class="ui fluid large teal submit button">
         </div>
-        <div class="ui error message"></div>
       </form>
-
-      <div class="ui message">
-        Not a member? <a href="/users/new">Sign Up Here!</a>   <!-- redirect to new_user page -->
-      </div>
+      <br><br>
     </div>
   </div>
   <%- include ./../boot_partials/footer %>

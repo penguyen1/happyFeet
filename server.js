@@ -37,9 +37,10 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-app.get('/', (req,res)=>res.render('users/login'));
+// if a session exists, redirect to ('/sneakers/'), else continue
+app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
 
-app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
+// app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 
 // Redirect to RESTful routes
 app.use('/sneakers', sneakerRoutes);

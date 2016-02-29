@@ -1,21 +1,26 @@
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">Build-A-Burger</a>
-          <a class="navbar-brand" href="/burgers">All Burgers</a>
-          <a class="navbar-brand" href="/burgers/new">Create a Burger</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li>Cheeses</li>
-            <li>Meats</li>
-            <li>Buns</li>
-            <li>Toppings</li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
+<nav class="navbar navbar-inverse navbar-fixed-top"> 
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar">Testing123</span>
+        <span class="icon-bar">Testing456</span>
+        <span class="icon-bar">Testing789</span>
+      </button>
+      <a class="navbar-brand" href="/sneakers/">Happy Feet</a>
+      <a class="navbar-brand" href="/sneakers/new">Add New Sneaker</a>
+      <!-- <a class="navbar-brand" href="/users/logout?_method=DELETE" data-method="put">Log Out</a> -->
+      <form class="navbar-brand" action="/users/logout?_method=DELETE" method="post">
+        <button>Log Out</button>
+      </form>
+      <!-- Search text bar here (float right) -->
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li>Jordans</li>  <!-- link to display all Jordans page? (search_results) -->
+        <li>Nike</li>     <!-- link to display all Nikes page? (search_results) -->
+        <li>Adidas</li>   <!-- link to display all Adidas page? (search_results) -->
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

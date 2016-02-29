@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%- include ./../boot_partials/head %>
+  <title>Sneaker Form</title>
+</head>
+<body>
+  
+  <div class="ui middle aligned center aligned grid">
+    <div class="column starter-template">
+      <h1> <%= data.title %> </h1>
+      <% console.log(data.route) %>
+      <form class="ui large form" action="<%= data.route %>" method="post">
+        <div class="ui stacked segment">
+          <div class="field">
+            <input type="text" name="name" value="<%= data.sneaker.snkr_name %>" placeholder="sneaker name" required>
+          </div>
+          <div class="field">
+            <input type="url" name="img_url" value="<%= data.sneaker.img_url %>" placeholder="sneaker image URL" required>
+          </div>
+          <div class="field brandName">
+            <select name="brand_id" required> 
+              <option value="">Select Brand</option>
+              <option value="1">Air Jordan</option>
+              <option value="2">Nike</option>
+              <option value="3">Adidas</option>
+              <!-- what if user wanted to include a new brand ?? -->
+            </select>
+          </div>
+          <div class="field balance"> 
+            Retail Price: $ <input type="number" name="retail_price" min="0" step="any" value="<%= data.sneaker.retail_price %>" placeholder="xxx.xx" required>
+          </div>
+          <div class="field balance"> 
+            Resale Price: $ <input type="number" name="resale_price" min="0" step="any" value="<%= data.sneaker.resale_price %>" placeholder="xxx.xx">
+          </div>
+          <div class="field">
+            <textarea placeholder="Write a fun fact about the sneaker!" name="description" rows="5" cols="30"><%= data.sneaker.description %></textarea>
+          </div>
+          <!-- <div class="ui fluid large teal submit button">Login</div> -->
+          <br><input type="submit" value="<%= data.buttonTitle %>" class="ui fluid large teal submit button">
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <%- include ./../boot_partials/footer %>
+</body>
+</html>

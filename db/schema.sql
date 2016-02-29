@@ -13,17 +13,17 @@ CREATE TABLE brand (
 CREATE TABLE users (
   user_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
-  shoe_size integer, 
+  shoe_size numeric, 
   balance numeric
 );
 
 CREATE TABLE sneakers (
   sneaker_id serial PRIMARY KEY UNIQUE,
   name VARCHAR(255),
-  brand_id integer REFERENCES brand ON DELETE CASCADE,
-  retail_price numeric,     -- how to add monetary input
+  brand_id integer REFERENCES brand ON DELETE CASCADE,    -- how to get brand name from brand_id ???
+  retail_price numeric,     
   resale_price numeric,
-  description VARCHAR(255),          -- how to add description text box?
+  description VARCHAR(255),
   img_url VARCHAR(255)
 );
 

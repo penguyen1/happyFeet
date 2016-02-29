@@ -8,12 +8,11 @@ var sneakerRoutes = require(path.join(__dirname, './sneakers'));    // directory
 
 
 users.post('/', db.createUser, (req,res)=>{
-  res.redirect('/');    // need to redirect to login -> user_home page
-                        // access user_id database (how do we get user_id?)
+  res.redirect('/');                // redirect to login page (to create a session)
 });
 
 users.get('/new', (req,res)=>{
-  res.render('users/new_user');     // redirect to new_user form
+  res.render('users/new_user', { data: '' });     // redirect to new_user form
 });
 
 // users.get('/login', (req,res)=>{    // used to be redirected from .post('/'), but now not needed.
@@ -21,13 +20,13 @@ users.get('/new', (req,res)=>{
 // });                                 // which redirects to .post('/login') where it'll be redirected to the user's homepage [ .get('/sneakers/') ] 
 
 users.post('/login', db.loginUser, (req,res)=>{           // sessions are logged here
-  req.session.user = res.rows;                            // stores user into sessions
-  // eval(pry.it);
-  console.log(req.session.user.member_id);
+  req.session.user = res.rows;
+  console.log("req.session.user.member_id: " + req.session.user.member_id);
   req.session.save( ()=>res.redirect('/sneakers/') );     // must save session before redirecting!    // need to redirect to user_home page (how to get user_id??)
 });
 
 users.delete('/logout', (req,res)=>{                      // delete user session|cookie
+  console.log('logging out!');
   req.session.destroy( (err)=>res.redirect('/') );
 });
 
