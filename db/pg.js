@@ -6,23 +6,19 @@ var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep
 
 // User Authenication & Authorization
 function loginUser(req,res,next) {
-  console.log('\nlogging in user');
-  console.log(req.body);
   pg.connect(connectionString, function(err,client,done){
-    if(err){    done();
-                return res.status(500).json({ success: false, data: err}); }
+    if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
     var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email],
       function(err, results){
-        console.log('loginUser SELECT query (results.rows): ');
+        console.log('\nloginUser results.rows: ');
         console.log(results.rows);
         done();
         if(err){ return console.error('error running query', err); }
         if(results.rows.length === 0){
           console.log('email does not exist in users db table');
-          res.render('./users/error.ejs', { data: req.body })
-          // next();
-          // res.status(204).json({ success: true, data: 'no content'});
+          // res.render('./users/error.ejs', { data: req.body })         // redirect visitor to error page that redirects to login page
+          res.render('./users/login.ejs', { data: 'Oops! This email does not exist!' });
         } else if(bcrypt.compareSync(req.body.password, results.rows[0].password_digest)){    // checks & verifies user password
           res.rows = results.rows[0];
           console.log('loginUser (passwords matched) res.rows: ');
@@ -95,7 +91,6 @@ function allSneakers(req, res, next){
 
     var query = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
-        console.log(results.rows);
         done();
         if(err){ return console.error('error running query', err); }
         res.rows = results.rows;

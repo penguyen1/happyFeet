@@ -38,7 +38,7 @@ app.use(express.static(path.join(__dirname, 'public')));  // static route to css
                                   // semantic-UI = 'semantic'
 // Homepage Route
 // if a session exists, redirect to ('/sneakers/'), else continue
-app.get('/', (req,res)=>res.render('users/login'));
+app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
 
 // app.get('/test', (req,res)=>res.render('users/test', { user: req.session.user }));    // test
 

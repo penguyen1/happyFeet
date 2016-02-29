@@ -15,17 +15,18 @@
             <input type="text" name="name" placeholder="Full Name" required>
           </div>
           <div class="field">
-            <input type="text" name="email" placeholder="E-mail Address" required>    <!-- type="email" -->
+            <input type="email" name="email" placeholder="E-mail Address" required>    <!-- type="email" -->
+            <div class="ui error message"></div>    <!-- Oops! That email is already taken! -->
           </div>
           <div class="field">
             <input type="password" name="password" placeholder="Create a password" required>
           </div>
           <div class="field balance">
-            Balance:  $
-            <input type="number" name="balance" min="0" step="any" placeholder="xxx.xx" required>
+            Balance: $ <input type="number" name="balance" min="0" step="any" placeholder="xxx.xx" required>
           </div>
-          <div class="field shoeSize"> Shoe Size: 
+          <div class="field shoeSize">
             <select name="shoe_size">
+              <option value="">Select Shoe Size</option>
               <option value="5">5</option><option value="5.5">5.5</option>
               <option value="6">6</option><option value="6.5">6.5</option>
               <option value="7">7</option><option value="7.5">7.5</option>
@@ -38,9 +39,8 @@
             </select>
           </div>
           <!-- <div class="ui fluid large teal submit button">Login</div> -->
-          <br><input type="submit" value="Sign Me Up!" class="ui fluid large teal submit button">  <!-- Can I do: value="Sign Me Up!" ???? -->
+          <br><input type="submit" value="Sign Me Up!" class="ui fluid large teal submit button">
         </div>
-        <div class="ui error message"></div>
       </form>
 
     </div>
