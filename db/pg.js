@@ -100,15 +100,11 @@ function allSneakers(req, res, next){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
     var getUserID = client.query("SELECT user_id FROM users ORDER BY user_id DESC LIMIT 1;", 
-      function(err, results){
-        done();
-        // console.log(results.rows);
-        // eval(pry.it);
-    });
+      function(err, results){ done() });
+
     var getUserSneakers = client.query("SELECT * FROM sneakers AS s INNER JOIN inventory AS i ON s.sneaker_id = i.sneaker_id WHERE user_id=($1);", [Uid],
       function(err, results){
         done();
-        if(err){ return console.error('error running query', err); }
         res.rows = results.rows;
         next();
     });
@@ -116,15 +112,15 @@ function allSneakers(req, res, next){
 }
 
 // add to inventory table 
-function addInventory(user_id, sneaker_id){
+function addInventory(req, res, next){
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
-    
-    var addToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [user_id, sneaker_id], 
-      function(err, results){
-        done();
-        if(err){ return console.error('error running query', err); }
-    });
+
+    console.log('adding to inventory, user_id: ' + req.session.user.member_id);
+    console.log('adding to inventory, sneaker_id: ' + req.params.id);
+
+    var addToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [req.session.user.member_id, req.params.id], 
+      function(err, results){ done(); next(); });
   })
 }
 
@@ -147,10 +143,12 @@ function addSneaker(req, res, next){
     // get most recent sneaker_id from sneakers table (step2)
     var lastSneakerID = client.query("SELECT sneaker_id FROM sneakers ORDER BY sneaker_id DESC LIMIT 1;",
       function(err, results){
-        var sneakerID = results.rows[0].sneaker_id; 
-        addInventory(Uid, sneakerID);     // insert into inventory table (step3)
         done();
-        if(err){ return console.error('error running query', err); }
+        var sneakerID = results.rows[0].sneaker_id;     // the most recently added sneaker_id 
+
+        // add to inventory table (step3)
+        var insertToInventory = client.query("INSERT INTO inventory(user_id, sneaker_id) VALUES ($1,$2);", [Uid, sneakerID],
+          function(err, results){ done() });
         next();
     });
   })
@@ -175,6 +173,7 @@ function getSneaker(req, res, next){
         done();
         if(err){ return console.error('error running query', err); }
         res.rows = results.rows;
+        // eval(pry.it)
         next();
       })
   })
@@ -217,37 +216,31 @@ function removeSneaker(req, res, next){
   })
 }
 
-// search sneaker 
-  // select * from sneakers where name ILIKE '%white%';
+// search sneaker(s)
+// Query commands were possible with help from Peter - thank you!!
 function searchSneaker(req, res, next){
   var Uid = req.session.user.member_id;
   console.log('searchSneaker: ' + Uid);
-  // what does the search look it? --> /sneakers/search?search=yeezy+flyknits
-  // where is it coming from?? -->  var search = req.query.search 
 
-  var search = req.query.search.split(' '); // string -> array  ['yeezy', 'FLYKNIT']
   var allResults = [];
+  var search = req.query.search.split(' '); // string -> array  ['yeezy', 'FLYKNIT']
+  var client = new pg.Client(connectionString);     // create new database connection
+
+  client.on('drain', client.end.bind(client));      // 'drain' (EventListener) - closes database connection
+
+  client.on('end', function() {                     // 'end' (EventListener) - executes when all queries are finished
+    res.rows = allResults;
+    next();
+  });
 
   search.forEach(function(word){
-    pg.connect(connectionString, function(err,client,done){
-      if(err){  done();   return res.status(500).json({ success: false, data: err}); }
-
-      client.query("SELECT * FROM sneakers WHERE name ILIKE ($1);", ['%'+word+'%'],
-        function(err, results){
-          done();
-          if(err){ return console.error('error running query', err); }
-
-          results.rows.forEach(function(sneaker){
-            allResults.push(sneaker);
-          });
-      });
-      res.rows = allResults;
-
+    var query = client.query("SELECT * FROM sneakers WHERE name ILIKE ($1);", ['%'+word+'%']);
+    query.on('row', function(sneaker){        // for each row returned, execute the following function
+      allResults.push(sneaker);
     });
   });
-  eval(pry.it);
-  next();   // go back to ('/sneakers/search')
 
+  client.connect();       // initializes connection to database
 }
 
 module.exports.createUser = createUser;
@@ -258,7 +251,7 @@ module.exports.addSneaker = addSneaker;
 module.exports.editSneaker = editSneaker;
 module.exports.removeSneaker = removeSneaker;
 module.exports.searchSneaker = searchSneaker;
-
+module.exports.addInventory = addInventory;
 
 
 

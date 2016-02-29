@@ -33,15 +33,12 @@ sneakers.route('/new')
 
 // show all queried sneakers from search
 sneakers.get('/search', db.searchSneaker, (req,res)=>{
-  // res.render('pages/search_results', { data: res.rows });
-  // eval(pry.it);
-  console.log('finitoooooooooooooooooooooooooooooooooooooooooooooooooooooooooo!!');
-  // eval(pry.it);
   res.render('pages/search_results', { data: res.rows });
 });
 
 // show edit sneaker form
 sneakers.get('/:id/edit', db.getSneaker, (req,res)=>{
+  eval(pry.it)
   res.render('pages/sneaker_form', { 
     data: {   title: 'Edit Sneaker',                            // edit sneaker properties
               route: `/sneakers/${req.params.id}?_method=PUT`,  // method override here for PUT
@@ -53,7 +50,11 @@ sneakers.get('/:id/edit', db.getSneaker, (req,res)=>{
 // show sneaker profile
 sneakers.route('/:id')
   .get(db.getSneaker, (req,res)=>{
+    // eval(pry.it)
     res.render('pages/sneaker', { data: res.rows[0] });
+  })
+  .post(db.addInventory, (req,res)=>{
+    res.redirect('/sneakers/');
   })
   .put(db.editSneaker, (req,res)=>{
     res.redirect('/sneakers/');

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome Back!</title>
+    <title>Search Results</title>
     <%- include ../boot_partials/head %>
   </head>
 
@@ -12,9 +12,33 @@
     
     <div class="container">
       <div class="starter-template">
+        <h1> Search Results </h1>
 
-      <h1> Search Results page </h1>
-      <h3> Searching for: <%= data %> </h3>
+        <!-- search box -->
+        <form action="/sneakers/search" method="get">
+          <input type="search" name="search" placeholder="Search sneaker">
+        </form>
+
+        <% console.log(data) %>
+
+        <% if(data.length) { %>
+          <% for(var i in data) { %><!-- use semantic card template? -->
+            <div> <!-- each sneaker -->
+              <div>
+                <img src=<%= data[i].img_url %>> 
+                <div>Name: <%= data[i].name %> </div>
+                <span>Sneaker ID: <%= data[i].sneaker_id %> </span> <!-- delete -->
+              </div>
+              <form action=<%= data[i].sneaker_id %> method="post">
+                <button> Add </button>
+              </form>
+            </div><br>
+          <% } %> 
+        <% } else { %>
+          <h4> Sorry, no results found. </h4>
+        <% } %>
+
+
 
       </div>
     </div><!-- /.container -->
