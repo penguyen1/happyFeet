@@ -38,7 +38,8 @@ app.use( bodyParser.json() );
 app.use( methodOverride('_method') );                     // allows PUT & DELETE methods
 app.set( 'views', './views' );                            // root directory for ejs files
 app.set( 'view engine', 'ejs' );
-                                // semantic-UI = 'semantic'
+app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
+                                  // semantic-UI = 'semantic'
 // Homepage Route
 app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
 
