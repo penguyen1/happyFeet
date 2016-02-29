@@ -20,8 +20,7 @@ users.get('/new', (req,res)=>{
 // });                                 // which redirects to .post('/login') where it'll be redirected to the user's homepage [ .get('/sneakers/') ] 
 
 users.post('/login', db.loginUser, (req,res)=>{           // sessions are logged here
-  req.session.user = res.rows;                            
-  // eval(pry.it);
+  req.session.user = res.rows;
   console.log("req.session.user.member_id: " + req.session.user.member_id);
   req.session.save( ()=>res.redirect('/sneakers/') );     // must save session before redirecting!    // need to redirect to user_home page (how to get user_id??)
 });

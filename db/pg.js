@@ -10,20 +10,17 @@ function loginUser(req,res,next) {
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
 
     var query = client.query("SELECT * FROM members WHERE email LIKE ($1);", [req.body.email],
-      function(err, results){
-        console.log('\nloginUser results.rows: ');
-        console.log(results.rows);
+      function(err, results){   
         done();
         if(err){ return console.error('error running query', err); }
         if(results.rows.length === 0){
           console.log('email does not exist in users db table');
-          // res.render('./users/error.ejs', { data: req.body })         // redirect visitor to error page that redirects to login page
           res.render('./users/login.ejs', { data: 'Oops! This email does not exist!' });
         } else if(bcrypt.compareSync(req.body.password, results.rows[0].password_digest)){    // checks & verifies user password
           res.rows = results.rows[0];
-          console.log('loginUser (passwords matched) res.rows: ');
-          console.log(res.rows);
           next();
+        } else {
+          res.render('./users/login.ejs', { data: 'Invalid email or password. Please try again.' });
         }
       })
   })
@@ -170,7 +167,7 @@ function editSneaker(req, res, next){
   // update sneakers table set col1=($1), col2=($2), etc. where sneaker_id=($7)
   pg.connect(connectionString, function(err,client,done){
     if(err){  done();   return res.status(500).json({ success: false, data: err}); }
-    // insert into sneakers table (step1)
+    
     var updateSneaker = client.query("UPDATE sneakers SET name=($1), brand_id=($2), retail_price=($3), resale_price=($4), description=($5), img_url=($6) WHERE sneaker_id=($7);",
       [req.body.name, req.body.brand_id, req.body.retail_price, req.body.resale_price, req.body.description, req.body.img_url, req.params.id], 
       function(err, results){
@@ -185,7 +182,18 @@ function editSneaker(req, res, next){
 function removeSneaker(req, res, next){
   var Uid = req.session.user.member_id;
   console.log('removeSneaker: ' + Uid);
+
   // delete from inventory table where sneaker_id=($1) AND user_id=($2)
+  pg.connect(connectionString, function(err,client,done){
+    if(err){  done();   return res.status(500).json({ success: false, data: err}); }
+    
+    var removeSneaker = client.query("DELETE FROM inventory WHERE user_id=($1) AND sneaker_id=($2);", [req.session.user.member_id, req.params.id], 
+      function(err, results){
+        done();
+        if(err){ return console.error('error running query', err); }
+        next();
+    });
+  })
 }
 
 // search sneaker 

@@ -15,25 +15,23 @@
           <div class="field">
             <div class="ui left icon input">
               <i class="user icon"></i>
-              <input type="text" name="email" placeholder="E-mail Address">
+              <input type="email" name="email" placeholder="E-mail Address"> 
             </div>
           </div>
           <div class="field">
             <div class="ui left icon input">
               <i class="lock icon"></i>
               <input type="password" name="password" placeholder="Password">
+            </div><br>
+            <div class="ui message"> 
+              <%= data %><br><a href="/users/new">Sign Up Here!</a> 
             </div>
           </div>
           <!-- <div class="ui fluid large teal submit button">Login</div> -->
           <br><input type="submit" value="Submit" class="ui fluid large teal submit button">
         </div>
-        <div class="ui error message"></div>
       </form>
       <br><br>
-      <div class="ui message">
-        <!-- That email does not exist! OR Not a member ?? -->
-        <%= data %> <a href="/users/new">Sign Up Here!</a>  <!-- redirect to new_user page -->
-      </div>
     </div>
   </div>
   <%- include ./../boot_partials/footer %>

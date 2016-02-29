@@ -1,15 +1,18 @@
-<nav class="navbar navbar-inverse navbar-fixed-top">   
+<nav class="navbar navbar-inverse navbar-fixed-top"> 
   <div class="container">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
         <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
+        <span class="icon-bar">Testing123</span>
+        <span class="icon-bar">Testing456</span>
+        <span class="icon-bar">Testing789</span>
       </button>
       <a class="navbar-brand" href="/sneakers/">Happy Feet</a>
       <a class="navbar-brand" href="/sneakers/new">Add New Sneaker</a>
-      <a class="navbar-brand" href="/users/logout">Log Out</a>
+      <!-- <a class="navbar-brand" href="/users/logout?_method=DELETE" data-method="put">Log Out</a> -->
+      <form class="navbar-brand" action="/users/logout?_method=DELETE" method="post">
+        <button>Log Out</button>
+      </form>
       <!-- Search text bar here (float right) -->
     </div>
     <div id="navbar" class="collapse navbar-collapse">
@@ -21,4 +24,3 @@
     </div><!--/.nav-collapse -->
   </div>
 </nav>
-

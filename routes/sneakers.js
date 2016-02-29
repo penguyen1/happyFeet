@@ -14,7 +14,6 @@ var db          = require('./../db/pg');
 
 // show user homepage (+ inventoried sneakers)
 sneakers.get('/', db.allSneakers, (req,res)=>{
-  // res.render('users/test', { user: req.session.user });         // testing
   res.render('pages/user_home', { data: res.rows });         // display all queried sneakers 
 });
 
@@ -55,7 +54,7 @@ sneakers.route('/:id')
   .put(db.editSneaker, (req,res)=>{
     res.redirect('/sneakers/');
   })
-  .delete(/*db.removeSneaker,*/ (req,res)=>{
+  .delete(db.removeSneaker, (req,res)=>{
     res.redirect('/sneakers/');
   });
 
