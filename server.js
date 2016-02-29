@@ -9,6 +9,7 @@ var methodOverride  = require('method-override');
 var session         = require('express-session');             // user authentication
 var pgSession       = require('connect-pg-simple')(session);  // allows user login
 var pg              = require('pg');
+var dotenv          = require('dotenv');
 
 if(process.env.ENVIRONMENT === 'production'){     // in heroku: add environment = production in config variables
   var connectionString = process.env.DATABASE_URL;

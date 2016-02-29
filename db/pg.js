@@ -1,5 +1,5 @@
 var pg                = require('pg');
-var dotenv          = require('dotenv');
+var dotenv            = require('dotenv');
 var session           = require('express-session');
 var bcrypt            = require('bcrypt');
 var salt              = bcrypt.genSaltSync(10);   // encrypts pw 10 layers deep
