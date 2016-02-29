@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Welcome Back!</title>
+    <title> Welcome Back! </title>
     <%- include ../boot_partials/head %>
   </head>
 
   <body>
-    <header>
-      <%- include ../boot_partials/nav %>
+    <header>  
+      <%- include ../boot_partials/nav %>   
     </header>
     
-   
-
     <div class="container">
-      <div class="starter-template">
-        <h1> User Home Page </h1>
-        <% console.log(data) %>
-        <% if(data.length) { %>
-          <% for(var i in data) { %>           <!-- use semantic card template? -->
-            <div> <!-- each sneaker -->
-              <div>
-                <a href="/sneakers/<%= data[i].sneaker_id%>">
-                  <img src=<%= data[i].img_url %>> 
-                </a>   <!-- width & height ?? -->
-                <div>Name: <%= data[i].name %> </div>
-                <span>Sneaker ID: <%= data[i].sneaker_id %> </span>
-              </div>
+    <div class="starter-template">
+      <h1> User Home Page </h1>
 
-              <% var edit = data[i].sneaker_id+"/edit" %>  <!-- "/sneaker" + data[i].sneaker_id + "/edit" ?? -->
-              <% var remove = data[i].sneaker_id+"?_method=delete" %>  <!-- "/sneaker" + data[i].sneaker_id + "/edit" -->
+      <!-- search box -->
+      <form action="/sneakers/search" method="get">
+        <input type="search" name="search" placeholder="Search sneaker">
+      </form>
 
-              <form action=<%= edit %> method="get">
-                <button> Edit </button>
-              </form>
-              <form action=<%= remove %> method="post">
-                <button> Delete </button>
-              </form>
-            </div><br>
-          <% } %> 
-        <% } else { %>
-          <h4> You don't have any sneakers in your inventory at the moment! </h4>
-          <h4> Enter a search or click on the 'Add New Sneaker' button above to start! </h4>
-        <% } %>
+      <% if(data.length) { %>
+        <% for(var i in data) { %><!-- use semantic card template? -->
+          <div> <!-- each sneaker -->
+            <div>
+              <a href="/sneakers/<%= data[i].sneaker_id%>">
+                <img src=<%= data[i].img_url %>>  <!-- include width & height ?? -->
+              </a>   
+              <div>Name: <%= data[i].name %> </div>
+             <!--  <span>Sneaker ID: <%= data[i].sneaker_id %> </span> -->
+            </div>
+
+            <!-- Edit button -->
+            <% var edit = data[i].sneaker_id+"/edit" %> 
+            <form action=<%= edit %> method="get">
+              <button> Edit </button>
+            </form>
+
+            <!-- Delete button -->
+            <% var remove = data[i].sneaker_id+"?_method=delete" %>
+            <form action=<%= remove %> method="post">
+              <button> Delete </button>
+            </form>
+          </div><br>
+        <% } %> 
+      <% } else { %>
+        <h4> You don't have any sneakers in your inventory at the moment! </h4>
+        <h4> Enter a search or click on the 'Add New Sneaker' button above to start! </h4>
+      <% } %>
 
 
 
-      </div>
+    </div>
     </div><!-- /.container -->
 
     <%- include ../boot_partials/footer %>

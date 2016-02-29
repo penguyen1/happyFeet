@@ -64,12 +64,13 @@ table chart of routes for `/sneakers`
 |---|---|:---:|:---:|---|
 |1| User home page & list all Sneakers | GET | `/` | call `db.allSneakers`, render to `pages/user_home` | 
 |2| Show Add Sneaker form | GET | `/new` | render `pages/sneaker_form`, route to `/sneakers/new` |
-|3| Add a new Sneaker | POST | `/new` | call `db.addSneaker`, redirect to `/sneakers/` |
+|3| Add a New Sneaker | POST | `/new` | call `db.addSneaker`, redirect to `/sneakers/` |
 |4| List Search Results | GET | `/search` | call `db.searchSneaker`, render to `pages/search_results` |
 |5| Show Edit Sneaker form | GET | `/:id/edit` | render `pages/sneaker_form`, route to `/sneakers/:id` |
 |6| Show Sneaker Profile | GET | `/:id` | call `db.getSneaker`, render to `pages/sneaker` |
-|7| Edit Sneaker | PUT | `/:id` | call `db.editSneaker`, redirect to `/sneakers/` |
-|8| Delete Sneaker | DELETE | `/:id` | call `db.removeSneaker`, redirect to `/sneakers/` |
+|7| Add Sneaker(to User) | POST | `/:id` | call `db.addInventory`, redirect to `/sneakers/` |
+|8| Edit Sneaker | PUT | `/:id` | call `db.editSneaker`, redirect to `/sneakers/` |
+|9| Delete Sneaker | DELETE | `/:id` | call `db.removeSneaker`, redirect to `/sneakers/` |
 
 
 
@@ -80,14 +81,15 @@ table chart of SQL queries using PG module
 
 || Function Name | What it does | and... | Redirect / Render to... | 
 |---|:---:|:---:|:---:|:---:|
-|1| loginUser | authenticates user email & password || `/sneakers/:user` | 
+|1| loginUser | authenticates user email & password || `/sneakers/` | 
 |2| createUser | encrypts password, inserts to `members` table | inserts to `users` table | `/users/` |
 |3| allSneakers | selects all `user_id` sneakers || `pages/user_home.ejs` |
 |4| getSneaker | selects `sneaker_id` info || `pages/sneaker.ejs` |
-|5| addSneaker | inserts to `sneakers` table | inserts to `inventory` table | `/sneakers/:user` |
-|6| editSneaker | updates `sneaker_id` in `sneakers` table || `/sneakers/:user` |
-|7| removeSneaker | deletes `sneaker_id` & `user_id` from `inventory` table || `/sneakers/:user` |
+|5| addSneaker | inserts to `sneakers` table | inserts to `inventory` table | `/sneakers/` |
+|6| editSneaker | updates `sneaker_id` in `sneakers` table || `/sneakers/` |
+|7| removeSneaker | deletes `sneaker_id` & `user_id` from `inventory` table || `/sneakers/` |
 |8| searchSneaker | selects from `sneakers` table that contain the search word(s) || `pages/search_results.ejs` |
+|9| addInventory | adds `sneaker_id` & `user_id` to `inventory` table || `/sneakers/` |
 
 --- 
 

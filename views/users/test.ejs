@@ -2,7 +2,7 @@
 <html>
 <head>
   <%- include ./../boot_partials/head %>
-  <title>Login</title>
+  <title>Search Test</title>
 </head>
 <body>
 
@@ -12,8 +12,8 @@
     </form>
   </div>
 
-  <% if(user){ %>
-    <h3>Welcome <%= user.email %> </h3>
+  <% if(data){ %>
+    <h3>Searching for: <%= data %> </h3>
   <% } %>
 
   
