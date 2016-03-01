@@ -15,10 +15,6 @@
         <h1> Search Results </h1>
       </div>
 
-        <!-- search box -->
-        <form action="/sneakers/search" method="get">
-          <input type="search" name="search" placeholder="Search sneaker">
-        </form>
 
         <% if(data.length) { %>
           <% for(var i in data) { %><!-- use semantic card template? -->
@@ -40,7 +36,6 @@
         <% } %>
 
     </div><!-- /.container -->
-    <%- include ../boot_partials/footer %>
   </body>
 </html>
 
