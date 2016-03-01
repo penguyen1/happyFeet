@@ -1,0 +1,23 @@
+      <div class="ui inverted menu">
+        <div class="header item"> Happy Feet </div>
+        <a class="item" href="/sneakers/">Home</a>
+        <a class="item" href="/sneakers/new">Add New Sneaker</a>
+
+        <div class="right menu">
+          <div class="item">
+            <div class="ui icon input">
+
+              <i class="search link icon"></i>
+
+              <form action="/sneakers/search" method="get">
+                <input type="search" name="search" placeholder="Search Sneaker">
+              </form>
+
+            </div>
+          </div>
+
+          <form class="ui item" action="/users/logout?_method=DELETE" method="post">
+            <a class="item"><button>Log Out</button></a>
+          </form>
+        </div>
+      </div> 

@@ -43,7 +43,7 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
+app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member? ' }));
 
 // Redirect to RESTful routes
 app.use('/sneakers', sneakerRoutes);
