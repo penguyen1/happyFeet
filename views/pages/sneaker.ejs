@@ -2,30 +2,28 @@
 <html lang="en">
   <head>
     <title>Sneaker Profile</title>
-    <%- include ../boot_partials/head %>
+    <%- include ../partials/head %>
   </head>
 
   <body>
     <header>
-      <%- include ../boot_partials/nav %>
+      <%- include ../partials/nav %>
     </header>
     
     <div class="container">
-      <div class="starter-template">
         <h1> Sneaker Profile page </h1><br>
-
-        <img src="<%= data.img_url %>">
+      <div class="ui middle aligned center aligned grid">
+      <div class="column">
+        <img class="ui fluid image" src="<%= data.img_url %>"><br><b>
         <div>Name: <%= data.snkr_name %> </div>
         <div>Brand: <%= data.brand_name %> </div>
         <div>Size <%= data.shoe_size %> </div>
         <div>Retail Value: $<%= data.retail_price %> </div>
         <div>Resale Value: $<%= data.resale_price %> </div>
-        <div>Fun Fact: <%= data.description %> </div>
-
+        <div>Fun Fact: <%= data.description %> </div></b>
+      </div>  
       </div>
-    </div><!-- /.container -->
-
-    <%- include ../boot_partials/footer %>
+    </div><!-- /.container -->            
   </body>
 </html>
 
