@@ -1,39 +1,42 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <%- include ./../boot_partials/head %>
-  <title>Happy Feet</title>
+  <%- include ../partials/head %>
 </head>
 <body>
 
-  <div class="ui middle aligned center aligned grid starter-template">
-    <h2> Welcome! Please Log In </h2><br><br>
-    <div class="column">
-      <!-- b64 here -->
-      <form class="ui large form" action="/users/login" method="post">
-        <div class="ui stacked segment">
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="user icon"></i>
-              <input type="email" name="email" placeholder="E-mail Address"> 
-            </div>
+  <div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <h2 class="ui black image header">
+      <div class="content">
+        We are Happy Feet! Please Log In
+      </div>
+    </h2>
+
+    <form class="ui large form" action="/users/login" method="post">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input type="text" name="email" placeholder="E-mail address">
           </div>
-          <div class="field">
-            <div class="ui left icon input">
-              <i class="lock icon"></i>
-              <input type="password" name="password" placeholder="Password">
-            </div><br>
-            <div class="ui message"> 
-              <%= data %><br><a href="/users/new">Sign Up Here!</a> 
-            </div>
-          </div>
-          <!-- <div class="ui fluid large teal submit button">Login</div> -->
-          <br><input type="submit" value="Submit" class="ui fluid large teal submit button">
         </div>
-      </form>
-      <br><br>
-    </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon"></i>
+            <input type="password" name="password" placeholder="Password">
+          </div><br>
+          <div class="ui message"> 
+            <%= data %> <a href="/users/new">  Sign Up Here!</a> 
+          </div>
+        </div>
+        <br><input type="submit" value="Submit" class="ui fluid large teal submit button">
+      </div>
+    </form>
+
   </div>
-  <%- include ./../boot_partials/footer %>
+  </div>
+
 </body>
 </html>

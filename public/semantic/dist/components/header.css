@@ -432,6 +432,10 @@ a.ui.teal.header:hover {
   border-bottom: 2px solid #00B5AD;
 }
 
+.ui.black.header {
+  color: #1b1c1d !important;
+}
+
 /* Inverted */
 .ui.inverted.teal.header {
   color: #6DFFFF !important;

@@ -9,11 +9,13 @@ var methodOverride  = require('method-override');
 var session         = require('express-session');             // user authentication
 var pgSession       = require('connect-pg-simple')(session);  // allows user login
 var pg              = require('pg');
-var connectionString = "postgres://PeterNguyen:pita@localhost/sneakers";        // hide the password!
+var dotenv          = require('dotenv');
 
-// if(!process.env.PORT){
-//   require('dotenv').config();
-// }
+if(process.env.ENVIRONMENT === 'production'){     // in heroku: add environment = production in config variables
+  var connectionString = process.env.DATABASE_URL;
+} else {                                          // in local  
+  var connectionString  = "postgres://PeterNguyen:DB_PASS@localhost/sneakers";
+}
 
 var db              = require('./db/pg');               // links server.js to pg.js
 var app             = express();
@@ -41,7 +43,7 @@ app.set( 'view engine', 'ejs' );
 app.use(express.static(path.join(__dirname, 'public')));  // static route to css files
                                   // semantic-UI = 'semantic'
 // Homepage Route
-app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member??' }));
+app.get('/', (req,res)=>res.render('users/login', { data: 'Not a member? ' }));
 
 // Redirect to RESTful routes
 app.use('/sneakers', sneakerRoutes);
