@@ -2,29 +2,26 @@
 <html lang="en">
   <head>
     <title> Welcome Back! </title>
-    <%- include ../boot_partials/head %>
+    <%- include ../partials/head %>
   </head>
 
   <body>
     <header>  
-      <%- include ../boot_partials/nav %>   
+      <%- include ../partials/nav %>
     </header>
     
     <div class="container">
-    <div class="starter-template">
-      <h1> User Home Page </h1>
-
-      <!-- search box -->
-      <form action="/sneakers/search" method="get">
-        <input type="search" name="search" placeholder="Search sneaker">
-      </form>
+      <div class="ui stacked segment">
+        <h1> User Home Page </h1>
+      </div>
 
       <% if(data.length) { %>
         <% for(var i in data) { %><!-- use semantic card template? -->
+
           <div> <!-- each sneaker -->
             <div>
               <a href="/sneakers/<%= data[i].sneaker_id%>">
-                <img src=<%= data[i].img_url %>>  <!-- include width & height ?? -->
+                <img src=<%= data[i].img_url %>>
               </a>   
               <div>Name: <%= data[i].name %> </div>
              <!--  <span>Sneaker ID: <%= data[i].sneaker_id %> </span> -->
@@ -43,19 +40,20 @@
             </form>
           </div><br>
         <% } %> 
+
       <% } else { %>
-        <h4> You don't have any sneakers in your inventory at the moment! </h4>
-        <h4> Enter a search or click on the 'Add New Sneaker' button above to start! </h4>
+        <div class="ui middle aligned center aligned grid">
+        <div class="column">
+        <div class="ui stacked segment">
+          <h4> You don't have any sneakers in your inventory at the moment! </h4>
+          <h4> Enter a search or click on the 'Add New Sneaker' button above to start! </h4>
+        </div>
+        </div>
+        </div>
       <% } %>
 
-
-
-    </div>
     </div><!-- /.container -->
-
-    <%- include ../boot_partials/footer %>
   </body>
 </html>
-
 
 
