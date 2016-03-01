@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <%- include ./../boot_partials/head %>
-  <title>New User</title>
+  <%- include ../partials/head %>
+  <title> New User Form </title>
 </head>
-<body>
+
+<body class="newUser">
 
   <div class="ui middle aligned center aligned grid">
-    <div class="column starter-template">
+    <div class="column">
 
-      <form class="ui large form" action="/users" method="post">
+      <form class="ui form" action="/users" method="post">
         <div class="ui stacked segment">
-          <div class="field">
-            <input type="text" name="name" placeholder="Full Name" required>
+          <h1 class="ui black image header">
+            <div class="content">
+              New User Registration
+            </div>
+          </h1>
+
+          <!-- User Name -->
+          <div class="required field">
+            <input type="text" name="name" placeholder="Your Full Name" required>
           </div>
-          <div class="field">
+
+          <!-- User Email -->
+          <div class="required field">
             <input type="email" name="email" placeholder="E-mail Address" required>
-            <div class="ui error message"> <%= data %> </div>    <!-- Oops! That email is already taken! -->
+            <div class="ui error message"> <%= data %> </div>
           </div>
-          <div class="field">
+
+          <!-- User Password -->
+          <div class="required field">
             <input type="password" name="password" placeholder="Create a password" required>
           </div>
-          <div class="field balance">
-            Balance: $ <input type="number" name="balance" min="0" step="any" placeholder="xxx.xx" required>
+
+          <!-- User Account Balance -->
+          <div class="required field">
+            <input type="number" name="balance" min="0" step="any" placeholder="Starting Balance: $000.00" required>
           </div>
-          <div class="field shoeSize">
-            <select name="shoe_size">
-              <option value="">Select Shoe Size</option>
+
+          <!-- User Sneaker Size -->
+          <div class="ui form">
+            <select class="ui search dropdown" name="shoe_size" required>
+              <option value="">Select Sneaker Size</option>
               <option value="5">5</option><option value="5.5">5.5</option>
               <option value="6">6</option><option value="6.5">6.5</option>
               <option value="7">7</option><option value="7.5">7.5</option>
@@ -38,8 +54,10 @@
               <option value="13">13</option><option value="14">14</option>
             </select>
           </div>
+
           <!-- <div class="ui fluid large teal submit button">Login</div> -->
-          <br><input type="submit" value="Sign Me Up!" class="ui fluid large teal submit button">
+          <br>
+          <button class="ui button" type="submit">Lace Me Up!</button>
         </div>
       </form>
 
