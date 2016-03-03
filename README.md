@@ -4,14 +4,6 @@
 
 **Happy Feet** is a sneaker web application allowing users to create and budget an inventory of the hottest sneakers around. 
 
-## NEED TO DO:
-* encrypt connectionString password
-* installation manual
-* Sneaker app description summary (maybe change name?)
-    * What can the user do?
-    * What are the features?
-* create issues
-
 ---
 
 ## User Story:
