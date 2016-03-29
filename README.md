@@ -4,7 +4,12 @@
 
 **Happy Feet** is a sneaker web application allowing users to create and budget an inventory of the hottest sneakers around. 
 
-https://thawing-forest-14049.herokuapp.com
+---
+
+#### Link
+
+[happyFeet App](https://thawing-forest-14049.herokuapp.com)
+
 ---
 
 ## User Story:
