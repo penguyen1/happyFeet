@@ -6,7 +6,7 @@
 
 ---
 
-#### Link
+### Visit the App 
 
 [happyFeet App](https://thawing-forest-14049.herokuapp.com)
 
