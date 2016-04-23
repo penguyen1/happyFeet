@@ -10,6 +10,11 @@
 
 [happyFeet App](https://thawing-forest-14049.herokuapp.com)
 
+```javascript
+demo email: test@yahoo.com
+demo password: test
+```
+
 ---
 
 ## User Story:
